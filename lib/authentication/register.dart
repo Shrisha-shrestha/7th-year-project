@@ -2,9 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/home/homescreen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+import '../model/Storagemodel.dart';
 
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key, required this.store});
+  final Store store;
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
@@ -148,7 +150,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    HomeScreen()));
+                                                    HomeScreen(store: widget.store,)));
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -183,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      RegisterScreen()));
+                                                      RegisterScreen(store: widget.store,)));
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(

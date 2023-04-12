@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:recipe/authentication/forgot_password.dart';
 import 'package:recipe/choices/choices.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import '../model/Storagemodel.dart';
 
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key, required this.store});
+  final Store store;
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -235,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChoiceScreen()));
+                                                    ChoiceScreen(store: widget.store,)));
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(

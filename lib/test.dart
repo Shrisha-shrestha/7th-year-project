@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:recipe/model/GetModelRecipeId.dart';
-import 'package:recipe/model/GetPopularDescription.dart';
+import 'package:recipe/model/GetDescription.dart';
 
 import 'API/API_connection.dart';
 import 'model/GetPopularRecipeId.dart';
@@ -52,12 +52,22 @@ class _TestState extends State<Test> {
     dynamic apiResult;
     APIService apiService = APIService();
 
-    apiResult = await apiService.getpopulardescription(
+    apiResult = await apiService.getdescription(
         widget.store.popularRecipeID![0],
         widget.store.popularRecipeID![1],
         widget.store.popularRecipeID![2],
         widget.store.popularRecipeID![3],
         widget.store.popularRecipeID![4]);
+
+    // Define the string of ingredients
+    String ingredientsString = apiResult.descriptions[4].images.toString();
+// Extract the substring inside the parentheses
+    String ingredientsSubstring = ingredientsString.substring(
+        ingredientsString.indexOf("(") + 1, ingredientsString.lastIndexOf(")"));
+
+// Split the substring into a List<String>
+    List<String> ingredientsList = ingredientsSubstring.split(", ");
+    widget.store.popularimagelist = ingredientsList;
 
     return apiResult;
   }
@@ -90,8 +100,14 @@ class _TestState extends State<Test> {
                       if (snapshot.hasError) {
                         return const Text('Error in connection');
                       } else if (snapshot.hasData) {
-                        return Text(
-                            snapshot.data!.descriptions.length.toString());
+                        return Column(
+                          children: [
+                            Text(snapshot.data!.descriptions[4].images
+                                .toString()),
+                            // Image.network(
+                            //     widget.store.imagelist![0].replaceAll('"', '')),
+                          ],
+                        );
                       }
                     }
                     return const Text('No future');

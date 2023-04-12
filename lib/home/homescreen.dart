@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../model/Storagemodel.dart';
 import '../pages/cookbook.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
 import '../pages/cookbook.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+  const HomeScreen({super.key, required this.store});
+  final Store store;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List pages = [Home(), Search(), CookBook(), CookBook()];
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
+    List pages = [
+      Home(
+        store: widget.store,
+      ),
+      Search(),
+      CookBook(),
+      CookBook()
+    ];
     return Scaffold(
       body: pages[selectedindex],
       bottomNavigationBar: BottomNavigationBar(

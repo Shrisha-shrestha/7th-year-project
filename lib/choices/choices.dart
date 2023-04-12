@@ -4,9 +4,11 @@ import 'package:recipe/Splash/splash.dart';
 import 'package:recipe/authentication/login.dart';
 import 'package:recipe/home/homescreen.dart';
 
-class ChoiceScreen extends StatefulWidget {
-  const ChoiceScreen({super.key});
+import '../model/Storagemodel.dart';
 
+class ChoiceScreen extends StatefulWidget {
+  const ChoiceScreen({super.key, required this.store});
+  final Store store;
   @override
   State<ChoiceScreen> createState() => _ChoiceScreenState();
 }
@@ -38,7 +40,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                              builder: (context) => LoginScreen(store: widget.store,)));
                         },
                         child: Align(
                           alignment: AlignmentDirectional.topEnd,
@@ -859,7 +861,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       ),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomeScreen()));
+                            builder: (context) => HomeScreen(store: widget.store,)));
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

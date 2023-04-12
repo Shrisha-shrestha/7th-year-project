@@ -1,0 +1,12 @@
+class NewRecipeResponseModel
+ {
+    NewRecipeResponseModel({
+        required this.newRecipes,
+    });
+
+    Map<String, int> newRecipes;
+
+    factory NewRecipeResponseModel.fromJson(Map<String, dynamic> json) => NewRecipeResponseModel(
+        newRecipes: Map.from(json["new_recipes"]).map((k, v) => MapEntry<String, int>(k, v)),
+    );   
+}
