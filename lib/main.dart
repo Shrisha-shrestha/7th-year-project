@@ -154,7 +154,6 @@ Future<Store> initializeApp() async {
     }
     store.newimagelist = newimages;
   }
-  print(store.newimagelist![4].toString());
   return store;
 }
 

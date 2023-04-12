@@ -350,7 +350,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             .store.newimagelist![index]
                                             .replaceAll('"', '') ==
                                         '0'
-                                    ? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930'
+                                    ? 'https://us.123rf.com/450wm/surfupvector/surfupvector1908/surfupvector190802662/129243509-denied-art-line-icon-censorship-no-photo-no-image-available-reject-or-cancel-concept-vector.jpg?ver=6'
                                     : widget.store.newimagelist![index]
                                         .replaceAll('"', '')),
                               )),
