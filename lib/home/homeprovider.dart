@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:recipe/pages/profile.dart';
 import '../helper/wrapper.dart';
-import '../model/Storagemodel.dart';
 import '../pages/cookbook.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
-import '../model/firebasecollection.dart';
 
 import '../authentication/authenticationServices.dart';
 
@@ -24,11 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List pages = [
-      Home(
-      ),
+      const Home(),
       const Search(),
       const CookBook(),
-     const wrapper(),
     ];
     return Scaffold(
       body: pages[selectedindex],
@@ -50,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.assessment), label: ''),
         ],
       ),
     );

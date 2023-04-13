@@ -21,6 +21,8 @@ class APIService {
   }
 
   Future<ModelBasedResponsemodel?> get_recipe_id2(int uid) async {
+    print(uid);
+    print('lollo');
     String url = 'http://10.0.2.2:8889/modelbasedrecommend?uid=$uid';
     final response = await http.get(
       Uri.parse(url),

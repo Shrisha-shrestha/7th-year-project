@@ -20,7 +20,7 @@ class _changeState extends State<change> {
     Userid? user =Provider.of<Userid?>(context);
     if(user!=null){
       return StreamBuilder<currentuserid>(
-        stream: DatabaseService(uid: user!.uid).current,
+        stream: DatabaseService(uid: user.uid).current,
         builder: (context,snapshot){
           if(snapshot.hasData){
             currentuserid? ud = snapshot.data;
@@ -56,7 +56,7 @@ class _changeState extends State<change> {
                       ),
                       onPressed: ()async{
                         if(_formkey.currentState!.validate()) {
-                          await DatabaseService(uid: user!.uid).updateid(
+                          await DatabaseService(uid: user.uid).updateid(
                               id  ?? ud.userid
                               );
                           Navigator.pop(context);
