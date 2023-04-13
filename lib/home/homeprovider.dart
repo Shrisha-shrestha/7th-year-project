@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:recipe/pages/profile.dart';
+import '../helper/wrapper.dart';
 import '../model/Storagemodel.dart';
 import '../pages/cookbook.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
-import '../pages/cookbook.dart';
+import '../model/firebasecollection.dart';
+
+import '../authentication/authenticationServices.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.store});
-  final Store store;
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AuthService _auth = AuthService();
+
+  dynamic user;
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
     List pages = [
       Home(
-        store: widget.store,
       ),
-      Search(),
-      CookBook(),
-      CookBook()
+      const Search(),
+      const CookBook(),
+     const wrapper(),
     ];
     return Scaffold(
       body: pages[selectedindex],

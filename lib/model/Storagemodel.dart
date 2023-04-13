@@ -27,3 +27,8 @@ class Store {
       this.populardescription,
       this.onDemandDescription});
 }
+
+class Userid{
+  final String? uid;
+  Userid({ this.uid});
+}

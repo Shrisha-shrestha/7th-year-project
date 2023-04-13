@@ -148,8 +148,8 @@ class _MyHomePageState extends State<SplashScreen> {
                     backgroundColor: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RegisterScreen(store: widget.store,)));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => RegisterScreen(store: widget.store,)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -173,8 +173,8 @@ class _MyHomePageState extends State<SplashScreen> {
                             color: Colors.black, fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginScreen(store: widget.store,)));
+                            // Navigator.of(context).push(MaterialPageRoute(
+                            //     builder: (context) => LoginScreen(store: widget.store,)));
                           },
                       ),
                     ]))

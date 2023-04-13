@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/Splash/splash.dart';
 import 'package:recipe/authentication/login.dart';
-import 'package:recipe/home/homescreen.dart';
+import 'package:recipe/home/homeprovider.dart';
 
 import '../model/Storagemodel.dart';
 
@@ -39,8 +39,8 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       padding: const EdgeInsets.only(right: 12.0, top: 18.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginScreen(store: widget.store,)));
+                          //   Navigator.of(context).push(MaterialPageRoute(
+                          //       builder: (context) => LoginScreen(store: widget.store,)));
                         },
                         child: Align(
                           alignment: AlignmentDirectional.topEnd,
@@ -860,8 +860,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                             Theme.of(context).colorScheme.secondary,
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomeScreen(store: widget.store,)));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => HomeScreen(
+                        //         )));
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
