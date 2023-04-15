@@ -5,7 +5,6 @@ import 'dart:convert';
 import '../model/GetDescription.dart';
 import '../model/GetNewRecipeId,dart';
 import '../model/GetPopularRecipeId.dart';
-import '../model/SearchRecipe.dart';
 
 class APIService {
   Future<RecipeIdResponseModel?> get_recipe_id(int uid) async {
@@ -51,7 +50,7 @@ class APIService {
   }
 
   Future<RecipeDescriptionResponseModel?> getdescription(
-      int? uid1, int? uid2, int? uid3, int? uid4, int? uid5) async {
+      int? uid1, int? uid2, int? uid3, int? uid4, int? uid5,) async {
     String url =
         'http://10.0.2.2:8889/getrecipes?uid1=$uid1&uid2=$uid2&uid3=$uid3&uid4=$uid4&uid5=$uid5';
     final response = await http.get(
@@ -66,7 +65,7 @@ class APIService {
     }
   }
 
-  Future<SearchResponseModel?> getSearchResults(String key) async {
+  Future<Map> getSearchResults(String key) async {
     print(key);
     String url = 'http://10.0.2.2:8889/searchrecipe';
     final response = await http.get(
@@ -74,11 +73,8 @@ class APIService {
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
-      SearchResponseModel responseModel =
-          SearchResponseModel.fromJson(json.decode(response.body));
+      Map responseModel =json.decode(response.body);
       return responseModel;
-                                               
-                                               
                                               } else {
       throw Exception('Error fetching data');
     }

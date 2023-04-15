@@ -12,10 +12,13 @@ class Store {
   List<String>? popularimagelist;
   List<String>? modelimagelist;
   List<String>? newimagelist;
+  List<String>? searchimagelist;
+
 
   RecipeDescriptionResponseModel? populardescription;
   RecipeDescriptionResponseModel? modeldescription;
   RecipeDescriptionResponseModel? newdescription;
+  RecipeDescriptionResponseModel? searchdescription;
 
   RecipeDescriptionResponseModel? onDemandDescription;
 

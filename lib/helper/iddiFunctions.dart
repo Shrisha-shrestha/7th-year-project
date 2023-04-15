@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../API/API_connection.dart';
 import '../model/GetDescription.dart';
 import '../model/Storagemodel.dart';
-import '../model/SearchRecipe.dart';
 
 Future<RecipeDescriptionResponseModel?> getD(List<int>? idlist) async {
   dynamic apiResult;
@@ -79,10 +78,19 @@ Future<Store> initializeApp(int id) async {
   return store;
 }
 
-Future<SearchResponseModel?> getresults(String searchterm) async {
+Future<Store> getresults(String searchterm) async {
+  Store store = Store();
   dynamic Val;
+
+  List<int> searchid = [];
   APIService apiService = APIService();
   Val = await apiService.getSearchResults(searchterm);
-  
-  return Val;
+
+  Val.forEach((key, value) {
+    searchid.add(value);
+  });
+  store.searchdescription = await getD(searchid);
+  store.searchimagelist = await getI(store, store.searchdescription!);
+  // print(store.searchdescription);
+  return store;
 }
