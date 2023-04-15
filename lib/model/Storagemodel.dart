@@ -1,20 +1,21 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+
 import 'GetDescription.dart';
 
 class Store {
   List<int>? popularRecipeID;
   List<int>? modelRecipeID;
-    List<int>? newRecipeID;
+  List<int>? newRecipeID;
 
   List<String>? popularimagelist;
   List<String>? modelimagelist;
-    List<String>? newimagelist;
-
+  List<String>? newimagelist;
 
   RecipeDescriptionResponseModel? populardescription;
   RecipeDescriptionResponseModel? modeldescription;
-    RecipeDescriptionResponseModel? newdescription;
+  RecipeDescriptionResponseModel? newdescription;
 
   RecipeDescriptionResponseModel? onDemandDescription;
 
@@ -28,7 +29,7 @@ class Store {
       this.onDemandDescription});
 }
 
-class Userid{
-  final String? uid;
-  Userid({ this.uid});
+class Userid extends ChangeNotifier {
+  String? uid;
+  Userid({this.uid});
 }

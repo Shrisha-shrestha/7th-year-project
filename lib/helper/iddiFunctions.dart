@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../API/API_connection.dart';
 import '../model/GetDescription.dart';
 import '../model/Storagemodel.dart';
+import '../model/SearchRecipe.dart';
 
 Future<RecipeDescriptionResponseModel?> getD(List<int>? idlist) async {
   dynamic apiResult;
@@ -34,7 +35,7 @@ Future<List<String>?> getI(
 }
 
 Future<Store> initializeApp(int id) async {
-  print(id);
+  print("init: $id");
   Store store = Store();
   dynamic apiResult1;
   APIService apiService = APIService();
@@ -73,5 +74,15 @@ Future<Store> initializeApp(int id) async {
   store.newdescription = await getD(store.newRecipeID);
   // Get new recipe's images
   store.newimagelist = await getI(store, store.newdescription!);
+
+  print('done');
   return store;
+}
+
+Future<SearchResponseModel?> getresults(String searchterm) async {
+  dynamic Val;
+  APIService apiService = APIService();
+  Val = await apiService.getSearchResults(searchterm);
+  
+  return Val;
 }

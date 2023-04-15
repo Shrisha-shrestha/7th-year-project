@@ -2,14 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/authentication/login.dart';
 import 'package:recipe/authentication/register.dart';
+import 'package:recipe/helper/wrapper.dart';
 
 import '../model/Storagemodel.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key, required this.store,required this.title});
-  final Store store;
+  const SplashScreen({super.key, });
 
-  final String title;
+
 
   @override
   State<SplashScreen> createState() => _MyHomePageState();
@@ -148,8 +148,8 @@ class _MyHomePageState extends State<SplashScreen> {
                     backgroundColor: Colors.white,
                   ),
                   onPressed: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => RegisterScreen(store: widget.store,)));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => wrapper()));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -173,8 +173,8 @@ class _MyHomePageState extends State<SplashScreen> {
                             color: Colors.black, fontWeight: FontWeight.bold),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => LoginScreen(store: widget.store,)));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => wrapper()));
                           },
                       ),
                     ]))

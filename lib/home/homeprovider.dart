@@ -19,13 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
-    List pages = [
+    List<Widget> pages = [
       const Home(),
-      const Search(),
+     // const Search(),
       const CookBook(),
     ];
     return Scaffold(
-      body: pages[selectedindex],
+      body: IndexedStack(index: selectedindex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {

@@ -8,24 +8,20 @@ import '../authentication/authenticationServices.dart';
 
 import '../home/homeprovider.dart';
 
-
-
 class wrapper extends StatelessWidget {
-   const wrapper({super.key, });
- 
+  const wrapper({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-
-    final id =Provider.of<Userid?>(context);
-    if(id==null)
-      {
-        return Toggler();
-      }
-    else
-      {
-       return ProfileScreen();
-      }
+    final id = Provider.of<Userid?>(context);
+    if (id == null) {
+      print('k');
+      return Toggler();
+    } else {
+      print('o');
+      return HomeScreen();
+    }
   }
-  }
-
-
+}

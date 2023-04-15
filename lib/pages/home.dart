@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe/pages/detail.dart';
 import 'package:recipe/pages/profile.dart';
 import 'package:shimmer/shimmer.dart';
 import '../API/API_connection.dart';
@@ -18,11 +19,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   late Store store;
+
   @override
   Widget build(BuildContext context) {
     TabController _tabcontrol = TabController(length: 3, vsync: this);
     Userid? user = Provider.of<Userid?>(context);
+    print(user);
     if (user != null) {
+      print('home: ${user.uid}');
       return StreamBuilder<currentuserid>(
         stream: DatabaseService(uid: user.uid).current,
         builder: (context, snapshot) {
@@ -122,8 +126,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ProfileScreen(),
+                                            builder: (context) => ProfileScreen(
+                                              id1: user,
+                                            ),
                                           ),
                                         );
                                       },
@@ -135,38 +140,38 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       // padding: EdgeInsets.all(0.0),
                                       shape: CircleBorder()),
                                 ),
-                                TabBar(
-                                  indicatorSize: TabBarIndicatorSize.tab,
-                                  controller: _tabcontrol,
-                                  labelPadding: const EdgeInsets.only(
-                                      left: 30, right: 30),
-                                  labelColor:
-                                      Theme.of(context).colorScheme.secondary,
-                                  labelStyle: const TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  unselectedLabelColor: Colors.grey,
-                                  isScrollable: true,
-                                  indicator: UnderlineTabIndicator(
-                                    borderRadius: BorderRadius.circular(2.0),
-                                    borderSide: BorderSide(
-                                        width: 2,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary),
-                                  ),
-                                  tabs: [
-                                    const Tab(
-                                      text: 'Recommended',
-                                    ),
-                                    const Tab(
-                                      text: 'Popular',
-                                    ),
-                                    const Tab(
-                                      text: 'New',
-                                    ),
-                                  ],
+                              ],
+                            ),
+                            TabBar(
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              controller: _tabcontrol,
+                              labelPadding:
+                                  const EdgeInsets.only(left: 30, right: 30),
+                              labelColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              labelStyle: const TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              unselectedLabelColor: Colors.grey,
+                              isScrollable: true,
+                              indicator: UnderlineTabIndicator(
+                                borderRadius: BorderRadius.circular(2.0),
+                                borderSide: BorderSide(
+                                    width: 2,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                              ),
+                              tabs: [
+                                const Tab(
+                                  text: 'Recommended',
+                                ),
+                                const Tab(
+                                  text: 'Popular',
+                                ),
+                                const Tab(
+                                  text: 'New',
                                 ),
                               ],
                             ),
@@ -189,22 +194,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) =>
                                           Shimmer.fromColors(
-                                              baseColor: Colors.grey[400],
-                                              highlightColor: Colors.white,
-                                              child:Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 15.0),
-                                              width: 200,
-                                              height: 170,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  
-                                                 
-                                                  ),
-                                                  
-                                            ), 
-                                              ),
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              right: 15.0),
+                                          width: 200,
+                                          height: 170,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300]!,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      ),
                                     ),
 
                                     //popular
@@ -214,22 +217,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) =>
                                           Shimmer.fromColors(
-                                              baseColor: Colors.grey[400],
-                                              highlightColor: Colors.white,
-                                              child:Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 15.0),
-                                              width: 200,
-                                              height: 170,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  
-                                                 
-                                                  ),
-                                                  
-                                            ), 
-                                              ),
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              right: 15.0),
+                                          width: 200,
+                                          height: 170,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300]!,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     //new
                                     ListView.builder(
@@ -238,22 +239,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) =>
                                           Shimmer.fromColors(
-                                              baseColor: Colors.grey[400],
-                                              highlightColor: Colors.white,
-                                              child:Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 15.0),
-                                              width: 200,
-                                              height: 170,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  
-                                                 
-                                                  ),
-                                                  
-                                            ), 
-                                              ),
+                                        baseColor: Colors.grey[300]!,
+                                        highlightColor: Colors.grey[100]!,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                              right: 15.0),
+                                          width: 200,
+                                          height: 170,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[300]!,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -353,7 +352,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  const ProfileScreen(),
+                                                  ProfileScreen(id1: user),
                                             ),
                                           );
                                         },
@@ -423,124 +422,145 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder:
                                             (BuildContext context, int index) {
-                                          return Stack(
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    right: 15.0),
-                                                width: 200,
-                                                height: 170,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.grey,
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(
-                                                          snapshot
-                                                              .data!
-                                                              .modelimagelist![
-                                                                  index]
-                                                              .replaceAll(
-                                                                  '"', '')),
-                                                    )),
-                                              ),
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    right: 15.0),
-                                                width: 200,
-                                                height: 170,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.black
-                                                        .withOpacity(0.18),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                              ),
-                                              Positioned(
-                                                bottom: 20.0,
-                                                right: 20.0,
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    //   setState(() {
-                                                    //     selectedindex1=index;
-                                                    //   });},
-                                                    // onDoubleTap:(){
-                                                    //   setState(() {
-                                                    //     selectedindex1=8;
-                                                    //   });
-                                                  },
-                                                  child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(2),
-                                                    height: 30,
-                                                    width: 30,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => Details(
+                                                    store: snapshot
+                                                        .data!
+                                                        .modeldescription!
+                                                        .descriptions[index],
+                                                    img: snapshot.data!
+                                                        .modelimagelist![index],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      right: 15.0),
+                                                  width: 200,
+                                                  height: 170,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      color: Colors.grey,
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            snapshot
+                                                                .data!
+                                                                .modelimagelist![
+                                                                    index]
+                                                                .replaceAll(
+                                                                    '"', '')),
+                                                      )),
+                                                ),
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      right: 15.0),
+                                                  width: 200,
+                                                  height: 170,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black
+                                                          .withOpacity(0.18),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                ),
+                                                Positioned(
+                                                  bottom: 20.0,
+                                                  right: 20.0,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      //   setState(() {
+                                                      //     selectedindex1=index;
+                                                      //   });},
+                                                      // onDoubleTap:(){
+                                                      //   setState(() {
+                                                      //     selectedindex1=8;
+                                                      //   });
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2),
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: Colors.white,
+                                                        ),
+                                                        shape: BoxShape.circle,
                                                         color: Colors.white,
                                                       ),
-                                                      shape: BoxShape.circle,
-                                                      color: Colors.white,
-                                                    ),
-                                                    child: const Icon(
-                                                      Icons
-                                                          .favorite_border_rounded,
-                                                      size: 20.0,
-                                                      color: Colors.black,
+                                                      child: const Icon(
+                                                        Icons
+                                                            .favorite_border_rounded,
+                                                        size: 20.0,
+                                                        color: Colors.black,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Positioned(
-                                                top: 10,
-                                                left: 10,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 3.0,
-                                                    ),
-                                                    Text(
-                                                      snapshot
-                                                          .data!
-                                                          .modeldescription!
-                                                          .descriptions[index]
-                                                          .recipeCategory,
-                                                      style: const TextStyle(
-                                                        fontSize: 15,
-                                                        color: Colors.white,
+                                                Positioned(
+                                                  top: 10,
+                                                  left: 10,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 3.0,
                                                       ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 3.0,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 190,
-                                                      child: Text(
+                                                      Text(
                                                         snapshot
                                                             .data!
                                                             .modeldescription!
                                                             .descriptions[index]
-                                                            .name
-                                                            .replaceAll(
-                                                                '&amp;', '&'),
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
+                                                            .recipeCategory,
                                                         style: const TextStyle(
-                                                          fontSize: 22,
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                          fontSize: 15,
                                                           color: Colors.white,
                                                         ),
                                                       ),
-                                                    )
-                                                  ],
+                                                      const SizedBox(
+                                                        height: 3.0,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 190,
+                                                        child: Text(
+                                                          snapshot
+                                                              .data!
+                                                              .modeldescription!
+                                                              .descriptions[
+                                                                  index]
+                                                              .name
+                                                              .replaceAll(
+                                                                  '&amp;', '&'),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 22,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           );
                                         },
                                       ),

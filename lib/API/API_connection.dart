@@ -1,9 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'package:recipe/model/GetModelRecipeId.dart';
 import 'dart:convert';
+
 import '../model/GetDescription.dart';
 import '../model/GetNewRecipeId,dart';
 import '../model/GetPopularRecipeId.dart';
+import '../model/SearchRecipe.dart';
 
 class APIService {
   Future<RecipeIdResponseModel?> get_recipe_id(int uid) async {
@@ -21,8 +23,6 @@ class APIService {
   }
 
   Future<ModelBasedResponsemodel?> get_recipe_id2(int uid) async {
-    print(uid);
-    print('lollo');
     String url = 'http://10.0.2.2:8889/modelbasedrecommend?uid=$uid';
     final response = await http.get(
       Uri.parse(url),
@@ -65,4 +65,24 @@ class APIService {
       throw Exception('Error fetching data');
     }
   }
+
+  Future<SearchResponseModel?> getSearchResults(String key) async {
+    print(key);
+    String url = 'http://10.0.2.2:8889/searchrecipe';
+    final response = await http.get(
+      Uri.parse(url),
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      SearchResponseModel responseModel =
+          SearchResponseModel.fromJson(json.decode(response.body));
+      return responseModel;
+                                               
+                                               
+                                              } else {
+      throw Exception('Error fetching data');
+    }
+  }
 }
+
+                             
