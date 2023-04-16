@@ -78,13 +78,16 @@ Future<Store> initializeApp(int id) async {
   return store;
 }
 
-Future<Store> getresults(String searchterm) async {
+Future<Store> getresults(List<String?> searchterm) async {
   Store store = Store();
   dynamic Val;
-
   List<int> searchid = [];
+
+  int len = searchterm.length;
+
   APIService apiService = APIService();
-  Val = await apiService.getSearchResults(searchterm);
+  Val = await apiService.getSearchResults(
+      searchterm[0]!, searchterm[1]!, searchterm[2]!);
 
   Val.forEach((key, value) {
     searchid.add(value);

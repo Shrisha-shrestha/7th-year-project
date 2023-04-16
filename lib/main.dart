@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:recipe/Splash/splash.dart';
-import 'package:recipe/authentication/login.dart';
-import 'package:recipe/helper/wrapper.dart';
-import 'package:recipe/model/Storagemodel.dart';
-import 'package:recipe/home/homeprovider.dart';
-import 'package:recipe/pages/detail.dart';
-import 'package:recipe/pages/profile.dart';
+// import 'package:recipe/Splash/splash.dart';
+// import 'package:recipe/authentication/login.dart';
+// import 'package:recipe/helper/wrapper.dart';
+// import 'package:recipe/model/Storagemodel.dart';
+// import 'package:recipe/home/homeprovider.dart';
+// import 'package:recipe/pages/detail.dart';
+// import 'package:recipe/pages/profile.dart';
 import 'package:recipe/pages/search.dart';
-import '../authentication/authenticationServices.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+// import '../authentication/authenticationServices.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(MaterialApp(
       title: 'Recipe App',
       theme: ThemeData(

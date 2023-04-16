@@ -17,11 +17,14 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabcontrol = TabController(length: 2, vsync: this);
+    // final scrollController = ScrollController();
 
+    print(widget.store.recipeInstructions);
     return SafeArea(
         child: Scaffold(
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
+        // controller: scrollController,
         slivers: [
           SliverAppBar(
             shape: const RoundedRectangleBorder(
@@ -32,9 +35,10 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
             ),
             expandedHeight: 300.0,
             pinned: true,
-            snap: true,
-            floating: true,
+            snap: false,
+            floating: false,
             flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
                 titlePadding:
                     EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
                 title: Text(
@@ -117,8 +121,12 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                               Row(
                                 children: [
                                   RatingBar(
-                                      initialRating: double.parse(
-                                          widget.store.aggregatedRating),
+                                      initialRating: widget
+                                                  .store.aggregatedRating ==
+                                              'NA'
+                                          ? 0.0
+                                          : double.parse(
+                                              widget.store.aggregatedRating),
                                       itemSize: 20.0,
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
@@ -270,14 +278,14 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                 // right: 15.0,
                                 bottom: 20.0),
                             child: SizedBox(
-                              height: 170,
+                              height: 600,
                               width: double.maxFinite,
                               child: TabBarView(
                                   controller: _tabcontrol,
                                   children: [
                                     //ingredients
                                     ListView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
+                                      // physics: NeverScrollableScrollPhysics(),
                                       itemCount: widget
                                           .store.recipeIngredientParts
                                           .replaceAll('c(', '')
@@ -307,8 +315,9 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                           .replaceAll('c(', '')
                                           .replaceAll(')', '')
                                           .replaceAll('"', '')
-                                          .replaceAll(',', ''),
+                                          .replaceAll('",', ''),
                                       textAlign: TextAlign.justify,
+                                      // maxLines: 20,
                                       style: TextStyle(
                                           color: Colors.black54,
                                           fontWeight: FontWeight.bold,

@@ -65,9 +65,8 @@ class APIService {
     }
   }
 
-  Future<Map> getSearchResults(String key) async {
-    print(key);
-    String url = 'http://10.0.2.2:8889/searchrecipe';
+  Future<Map> getSearchResults(String s1,String s2,String s3) async {
+    String url = 'http://10.0.2.2:8889/searchrecipe?s1=$s1&s2=$s2&s3=$s3';
     final response = await http.get(
       Uri.parse(url),
     );

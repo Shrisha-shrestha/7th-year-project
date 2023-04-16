@@ -15,9 +15,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   TextEditingController editingController = TextEditingController();
 
-
   Future<Store>? future;
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +42,8 @@ class _SearchState extends State<Search> {
                             Card(
                               elevation: 4,
                               shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(10.0))),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0))),
                               child: Row(
                                 children: [
                                   IconButton(
@@ -68,8 +66,13 @@ class _SearchState extends State<Search> {
                                     child: TextField(
                                       controller: editingController,
                                       onSubmitted: (String? value) async {
+                                        List<String?> words = value!.split(" ");
+                                        words.add('0');
+                                        words.add('0');
+                                        words.add('0');
+                                        print(words);
                                         value != null
-                                            ? future = getresults(value)
+                                            ? future = getresults(words)
                                             : null;
                                       },
                                       keyboardType: TextInputType.text,
@@ -139,6 +142,7 @@ class _SearchState extends State<Search> {
                                               int index) {
                                             return GestureDetector(
                                               onTap: () {
+                                                print('object');
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -155,111 +159,99 @@ class _SearchState extends State<Search> {
                                                   ),
                                                 );
                                               },
-                                              child: Stack(
-                                                children: [
-                                                  Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            right: 15.0),
-                                                    width: 200,
-                                                    height: 170,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        color: Colors.grey,
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: NetworkImage(
-                                                              snapshot
-                                                                  .data!
-                                                                  .searchimagelist![
-                                                                      index]
-                                                                  .replaceAll(
-                                                                        '"',
-                                                                        '') ==
-                                                                '0'
-                                                            ? 'https://us.123rf.com/450wm/surfupvector/surfupvector1908/surfupvector190802662/129243509-denied-art-line-icon-censorship-no-photo-no-image-available-reject-or-cancel-concept-vector.jpg?ver=6'
-                                                            : snapshot
-                                                                .data!
-                                                                .searchimagelist![
-                                                                    index]
-                                                                .replaceAll(
-                                                                    '"', '')),
-                                                        )),
-                                                  ),
-                                                  Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            right: 15.0),
-                                                    width: 200,
-                                                    height: 170,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.black
-                                                            .withOpacity(0.18),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20)),
-                                                  ),
-                                                  Positioned(
-                                                    top: 10,
-                                                    left: 10,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const SizedBox(
-                                                          height: 3.0,
-                                                        ),
-                                                        Text(
-                                                          snapshot
-                                                              .data!
-                                                              .searchdescription!
-                                                              .descriptions[
-                                                                  index]
-                                                              .recipeCategory,
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 15,
-                                                            color: Colors.white,
+                                              child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        margin: const EdgeInsets
+                                                            .only(right: 15.0),
+                                                        width: 100,
+                                                        height: 100,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                color:
+                                                                    Colors.grey,
+                                                                image:
+                                                                    DecorationImage(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(snapshot.data!.searchimagelist![index].replaceAll(
+                                                                              '"',
+                                                                              '') ==
+                                                                          '0'
+                                                                      ? 'https://us.123rf.com/450wm/surfupvector/surfupvector1908/surfupvector190802662/129243509-denied-art-line-icon-censorship-no-photo-no-image-available-reject-or-cancel-concept-vector.jpg?ver=6'
+                                                                      : snapshot
+                                                                          .data!
+                                                                          .searchimagelist![
+                                                                              index]
+                                                                          .replaceAll(
+                                                                              '"',
+                                                                              '')),
+                                                                )),
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          const SizedBox(
+                                                            height: 3.0,
                                                           ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 3.0,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 190,
-                                                          child: Text(
+                                                          Text(
                                                             snapshot
                                                                 .data!
                                                                 .searchdescription!
                                                                 .descriptions[
                                                                     index]
-                                                                .name
-                                                                .replaceAll(
-                                                                    '&amp;',
-                                                                    '&'),
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
+                                                                .recipeCategory,
                                                             style:
                                                                 const TextStyle(
-                                                              fontSize: 22,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                              fontSize: 15,
                                                               color:
-                                                                  Colors.white,
+                                                                  Colors.black,
                                                             ),
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                          const SizedBox(
+                                                            height: 3.0,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 190,
+                                                            child: Text(
+                                                              snapshot
+                                                                  .data!
+                                                                  .searchdescription!
+                                                                  .descriptions[
+                                                                      index]
+                                                                  .name
+                                                                  .replaceAll(
+                                                                      '&amp;',
+                                                                      '&'),
+                                                              maxLines: 2,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Icon(Icons.arrow_right)
+                                                    ],
+                                                  )),
                                             );
                                           },
                                         ),
