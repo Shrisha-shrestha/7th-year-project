@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       const Home(),
-     // const Search(),
+      const Search(),
       const CookBook(),
     ];
     return Scaffold(

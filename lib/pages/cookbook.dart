@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/exporter.dart';
 
-class CookBook extends StatefulWidget {
+class CookBook extends StatelessWidget {
   const CookBook({super.key});
 
   @override
-  State<CookBook> createState() => _CookBookState();
-}
-
-class _CookBookState extends State<CookBook> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const RecipeView();
   }
 }

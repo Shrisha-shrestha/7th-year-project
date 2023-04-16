@@ -14,13 +14,12 @@ class Store {
   List<String>? newimagelist;
   List<String>? searchimagelist;
 
-
   RecipeDescriptionResponseModel? populardescription;
   RecipeDescriptionResponseModel? modeldescription;
   RecipeDescriptionResponseModel? newdescription;
   RecipeDescriptionResponseModel? searchdescription;
 
-  RecipeDescriptionResponseModel? onDemandDescription;
+  RecipeDescriptionResponseModel? cookbook;
 
   Store(
       {this.popularRecipeID,
@@ -29,7 +28,7 @@ class Store {
       this.modelimagelist,
       this.modeldescription,
       this.populardescription,
-      this.onDemandDescription});
+      this.cookbook});
 }
 
 class Userid extends ChangeNotifier {
