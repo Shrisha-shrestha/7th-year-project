@@ -39,11 +39,18 @@ class AuthService {
     return user != null ? Userid(uid: user.uid) : null;
   }
 
+
   Stream<Userid?> get user {
     return _auth
         .authStateChanges()
         .map((User? user) => _userFromfireuser(user!));
   }
+
+  // Stream<Userid?> get user {
+  //   return _auth
+  //       .authStateChanges()
+  //       .map((User? user) => _userFromfireuser(user!));
+  // }
 
   Future regwithEandP(String email, String password) async {
     try {

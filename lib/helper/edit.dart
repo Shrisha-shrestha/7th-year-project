@@ -7,7 +7,7 @@ import '../authentication/authenticationServices.dart';
 
 class change extends StatefulWidget {
   change({super.key, required this.id});
-  final Userid? id;
+  final currentuserid? id;
 
   @override
   State<change> createState() => _changeState();
@@ -18,7 +18,7 @@ class _changeState extends State<change> {
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    Userid? user = widget.id;
+    currentuserid? user = widget.id;
     if (user != null) {
       return StreamBuilder<currentuserid>(
         stream: DatabaseService(uid: user.uid).current,

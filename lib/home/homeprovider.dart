@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../helper/wrapper.dart';
+import '../model/Storagemodel.dart';
 import '../pages/cookbook.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
@@ -13,14 +14,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final AuthService _auth = AuthService();
-
-  dynamic user;
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      const Home(),
+      // const Home(),
       const Search(),
       const CookBook(),
     ];
@@ -41,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         showUnselectedLabels: false,
         showSelectedLabels: true,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
+          // BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: ''),
         ],

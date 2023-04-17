@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:recipe/pages/cookbook.dart';
 
-import '../bloc/recipe_cubit.dart';
+import '../Bloc/CookBook_Bloc/recipe_cubit.dart';
 import '../model/GetDescription.dart';
 
 class Details extends StatefulWidget {

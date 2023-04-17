@@ -14,7 +14,7 @@ import '../model/firebasecollection.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key, required this.id1});
-  final Userid? id1;
+  final currentuserid? id1;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -25,9 +25,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Userid? user = widget.id1;
+    currentuserid? user = widget.id1;
 
-    void _showSettingsPanel(Userid? user) {
+    void _showSettingsPanel(currentuserid? user) {
       showModalBottomSheet(
           context: context,
           builder: (context) {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../model/GetDescription.dart';
+import '../../model/GetDescription.dart';
 
 class RecipeCubit extends Cubit<List<Description>> {
   RecipeCubit() : super([]);

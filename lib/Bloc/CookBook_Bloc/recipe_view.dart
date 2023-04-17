@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe/model/GetDescription.dart';
-import '../bloc/exporter.dart';
-import '../pages/detail.dart';
+import '../CookBook_Bloc/exporter.dart';
+import '../../pages/detail.dart';
 
 class RecipeView extends StatelessWidget {
   const RecipeView({super.key});
