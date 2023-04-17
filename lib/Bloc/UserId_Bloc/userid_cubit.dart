@@ -5,13 +5,21 @@ import '../../authentication/authenticationServices.dart';
 import '../../model/GetDescription.dart';
 import '../../model/firebasecollection.dart';
 
-class UseridCubit extends Cubit<Stream<Userid?>>  {
-  UseridCubit() : super(AuthService().user);
-  @override
-  emit(state);
-}
+class UseridCubit extends Cubit<Stream<Userid?>?> {
+  UseridCubit() : super(null);
 
-class CurrentidCubit extends Cubit<Stream<currentuserid>>  {
-  CurrentidCubit() : super(DatabaseService(uid:'1').current);
-  void editid(String id) => emit(DatabaseService(uid:id).current);
+  final AuthService _auth = AuthService();
+  void login(String email, String password) async {
+    await _auth.signIn(email, password);
+    return emit(_auth.user);
+  }
+
+  void register(String email, String password) async {
+    await _auth.regwithEandP(email, password);
+    return emit(_auth.user);
+  }
+
+  void logout() async {
+    return emit(await _auth.signout());
+  }
 }

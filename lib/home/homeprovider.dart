@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe/pages/profile.dart';
 import '../helper/wrapper.dart';
 import '../model/Storagemodel.dart';
 import '../pages/cookbook.dart';
@@ -8,7 +9,8 @@ import '../pages/search.dart';
 import '../authentication/authenticationServices.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key,required this.fid});
+  final String fid;
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -18,9 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
-      // const Home(),
+       Home(fid: widget.fid,),
       const Search(),
       const CookBook(),
+       ProfileScreen(fid: widget.fid,),
     ];
     return Scaffold(
       body: IndexedStack(index: selectedindex, children: pages),
@@ -39,9 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
         showUnselectedLabels: false,
         showSelectedLabels: true,
         items: [
-          // BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_rounded), label: ''),
         ],
       ),
     );

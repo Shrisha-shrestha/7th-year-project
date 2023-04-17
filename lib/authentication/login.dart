@@ -8,6 +8,7 @@ import 'package:recipe/helper/wrapper.dart';
 import 'package:recipe/home/homeprovider.dart';
 import 'package:recipe/pages/home.dart';
 
+import '../Bloc/UserId_Bloc/userid_cubit.dart';
 import '../Splash/loading.dart';
 import '../model/Storagemodel.dart';
 import '../model/firebasecollection.dart';
@@ -32,25 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    Userid? user = Provider.of<Userid?>(context);
-    if (user != null) {
-      return StreamBuilder<currentuserid>(
-        stream: DatabaseService(uid: user.uid).current,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            currentuserid? ud = snapshot.data;
-            return Material(
-              child: SafeArea(
-                child:
-                    Scaffold(body: Center(child: Text(ud!.userid.toString()))),
-              ),
-            );
-          } else {
-            return Loading();
-          }
-        },
-      );
-    } else {
       return Material(
         child: SafeArea(
           child: load
@@ -350,17 +332,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       setState(() {
                                                         load = true;
                                                       });
-                                                      dynamic result =
-                                                          await _auth.signIn(
+                                                      // dynamic result =
+                                                      //     await _auth.signIn(
+                                                      //         email, password);
+                                               context.read<UseridCubit>().login(
                                                               email, password);
-
-                                                      if (result == null) {
-                                                        setState(() {
+                                                               setState(() {
                                                           load = false;
                                                         });
-                                                        error =
-                                                            'couldnt sign in with that';
-                                                      }
+                                                      // if (result == null) {
+                                                      //   setState(() {
+                                                      //     load = false;
+                                                      //   });
+                                                      //   error =
+                                                      //       'couldnt sign in with that';
+                                                      // }
                                                       // setState(() {
                                                       //   load = false;
                                                       // });
@@ -413,6 +399,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
         ),
       );
-    }
+    
   }
 }

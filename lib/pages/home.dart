@@ -27,12 +27,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabcontrol = TabController(length: 3, vsync: this);
     // Userid? user = Provider.of<Userid?>(context);
-    return BlocBuilder<CurrentidCubit, Stream<currentuserid>>(
-      builder: (context, state) {
-        // print(state == null?'true':'false');
-        // return Text('${state.first.}');
-        if (state != null) {
+    
           return StreamBuilder<currentuserid>(
+            // initialData: ,
             stream: DatabaseService(uid:widget.fid).current,
             builder: (context, snapshot) {
               print(snapshot.hasData == true ? 'true' : 'false');
@@ -132,29 +129,29 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                    Positioned(
-                                      top: 1,
-                                      right: 1,
-                                      child: RawMaterialButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProfileScreen(
-                                                  id1: ud,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          fillColor: Colors.white,
-                                          child: Icon(
-                                            Icons.person_2_rounded,
-                                            size: 25.0,
-                                          ),
-                                          // padding: EdgeInsets.all(0.0),
-                                          shape: CircleBorder()),
-                                    ),
+                                    // Positioned(
+                                    //   top: 1,
+                                    //   right: 1,
+                                    //   child: RawMaterialButton(
+                                    //       onPressed: () {
+                                    //         Navigator.push(
+                                    //           context,
+                                    //           MaterialPageRoute(
+                                    //             builder: (context) =>
+                                    //                 ProfileScreen(
+                                                  
+                                    //             ),
+                                    //           ),
+                                    //         );
+                                    //       },
+                                    //       fillColor: Colors.white,
+                                    //       child: Icon(
+                                    //         Icons.person_2_rounded,
+                                    //         size: 25.0,
+                                    //       ),
+                                    //       // padding: EdgeInsets.all(0.0),
+                                    //       shape: CircleBorder()),
+                                    // ),
                                   ],
                                 ),
                                 TabBar(
@@ -368,27 +365,27 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                           ),
                                         ),
                                       ),
-                                      Positioned(
-                                        top: 1,
-                                        right: 1,
-                                        child: RawMaterialButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProfileScreen(id1: ud),
-                                                ),
-                                              );
-                                            },
-                                            fillColor: Colors.white,
-                                            child: Icon(
-                                              Icons.person_2_rounded,
-                                              size: 25.0,
-                                            ),
-                                            // padding: EdgeInsets.all(0.0),
-                                            shape: CircleBorder()),
-                                      )
+                                      // Positioned(
+                                      //   top: 1,
+                                      //   right: 1,
+                                      //   child: RawMaterialButton(
+                                      //       onPressed: () {
+                                      //         Navigator.push(
+                                      //           context,
+                                      //           MaterialPageRoute(
+                                      //             builder: (context) =>
+                                      //                 ProfileScreen(),
+                                      //           ),
+                                      //         );
+                                      //       },
+                                      //       fillColor: Colors.white,
+                                      //       child: Icon(
+                                      //         Icons.person_2_rounded,
+                                      //         size: 25.0,
+                                      //       ),
+                                      //       // padding: EdgeInsets.all(0.0),
+                                      //       shape: CircleBorder()),
+                                      // )
                                     ],
                                   ),
                                   TabBar(
@@ -929,39 +926,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               }
             },
           );
-        } else {
-          return Material(
-            child: SafeArea(
-              child: ListView(
-                padding: EdgeInsets.all(5),
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: AssetImage('assets/splash.jpg'),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.account_circle_outlined),
-                    title: Text("Sign in"),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => wrapper(),
-                        ),
-                      );
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.edit),
-                    title: Text("Change User Id"),
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-      },
-    );
+        } 
+      
+    
   }
-}
+

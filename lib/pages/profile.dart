@@ -7,14 +7,15 @@ import 'package:recipe/home/homeprovider.dart';
 import 'package:recipe/model/Storagemodel.dart';
 import 'package:recipe/pages/home.dart';
 
+import '../Bloc/UserId_Bloc/userid_cubit.dart';
 import '../authentication/authenticationServices.dart';
 import '../helper/edit.dart';
 import '../helper/wrapper.dart';
 import '../model/firebasecollection.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key, required this.id1});
-  final currentuserid? id1;
+  ProfileScreen({super.key,required this.fid});
+  final String fid;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -25,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    currentuserid? user = widget.id1;
 
     void _showSettingsPanel(currentuserid? user) {
       showModalBottomSheet(
@@ -38,9 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           });
     }
 
-    if (user != null) {
       return StreamBuilder<currentuserid>(
-        stream: DatabaseService(uid: user.uid).current,
+        stream: DatabaseService(uid: widget.fid).current,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             currentuserid? ud = snapshot.data;
@@ -54,13 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextStyle(color: Colors.black, letterSpacing: 1.5),
                   ),
                   centerTitle: true,
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.pop(context, false),
-                  ),
+                  
                 ),
                 body: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -142,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Colors.amber.withOpacity(0.5)),
                         ),
                         onPressed: () {
-                          _showSettingsPanel(user);
+                          _showSettingsPanel(ud);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -237,8 +230,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                           child: ListTile(
-                            onTap: () async {
-                              await _auth.signout();
+                            onTap: () {
+                              context.read<UseridCubit>().logout();
                             },
                             leading: CircleAvatar(
                                 radius: 16.0,
@@ -298,40 +291,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
         },
       );
-    } else {
-      return Material(
-        child: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.all(5),
-            children: <Widget>[
-              CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage('assets/splash.jpg'),
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle_outlined),
-                title: Text("Sign in"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => wrapper(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text("Change User Id"),
-                onTap: () {
-                  // _showSettingsPanel();
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-    }
+   
   }
 }
 

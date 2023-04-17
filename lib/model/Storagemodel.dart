@@ -21,8 +21,12 @@ class Store {
 
   RecipeDescriptionResponseModel? cookbook;
 
+  String? firebaseID;
+
   Store(
+    
       {this.popularRecipeID,
+      this.firebaseID,
       this.modelRecipeID,
       this.popularimagelist,
       this.modelimagelist,

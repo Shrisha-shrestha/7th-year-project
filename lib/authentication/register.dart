@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe/home/homeprovider.dart';
 
+import '../Bloc/UserId_Bloc/userid_cubit.dart';
 import '../model/Storagemodel.dart';
 import 'authenticationServices.dart';
 
@@ -196,16 +198,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 setState(() {
                                                   load = true;
                                                 });
-                                                dynamic result =
-                                                    await _auth.regwithEandP(
-                                                        email, password);
-                                                if (result == null) {
-                                                  setState(() {
-                                                    load = false;
-                                                    error =
-                                                        'Please supply a valid email';
-                                                  });
-                                                }
+                                                context.read<UseridCubit>().register(
+                                                              email, password);
+                                                               setState(() {
+                                                          load = false;
+                                                        });
                                               }
                                             },
                                             child: Padding(

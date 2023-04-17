@@ -46,11 +46,7 @@ class AuthService {
         .map((User? user) => _userFromfireuser(user!));
   }
 
-  // Stream<Userid?> get user {
-  //   return _auth
-  //       .authStateChanges()
-  //       .map((User? user) => _userFromfireuser(user!));
-  // }
+  
 
   Future regwithEandP(String email, String password) async {
     try {
@@ -58,8 +54,8 @@ class AuthService {
           email: email, password: password);
       User? comingUser = result.user;
 
-      await DatabaseService(uid: comingUser!.uid).updateid(1);
-      return _userFromfireuser(comingUser);
+      // await DatabaseService(uid: comingUser!.uid).updateid(1);
+      return _userFromfireuser(comingUser!);
     } catch (e) {
       print(e.toString());
       return null;

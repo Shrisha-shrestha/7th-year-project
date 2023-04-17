@@ -18,19 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiBlocProvider(
-      providers: [
-        // StreamProvider<Userid?>.value(
-        //   value: AuthService().user,
-        //   initialData: null,
-        //   catchError: (context, e) {
-        //     print('error in LocationModelNormal: ${e.toString()}');
-
-        //     return null;
-        //   },
-        // ),
-        BlocProvider<CurrentidCubit>(
-          create: (BuildContext context) => CurrentidCubit(),
-        ),
+      providers: [        
         BlocProvider<UseridCubit>(
           create: (BuildContext context) => UseridCubit(),
         ),
