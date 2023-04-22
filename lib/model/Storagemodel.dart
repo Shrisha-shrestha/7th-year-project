@@ -13,18 +13,21 @@ class Store {
   List<String>? modelimagelist;
   List<String>? newimagelist;
   List<String>? searchimagelist;
+  List<String>? randomimagelist;
+  List<String>? categoryimagelist;
 
   RecipeDescriptionResponseModel? populardescription;
   RecipeDescriptionResponseModel? modeldescription;
   RecipeDescriptionResponseModel? newdescription;
   RecipeDescriptionResponseModel? searchdescription;
+  RecipeDescriptionResponseModel? randomdescription;
+  RecipeDescriptionResponseModel? categorydescription;
 
   RecipeDescriptionResponseModel? cookbook;
 
   String? firebaseID;
 
   Store(
-    
       {this.popularRecipeID,
       this.firebaseID,
       this.modelRecipeID,
@@ -32,6 +35,11 @@ class Store {
       this.modelimagelist,
       this.modeldescription,
       this.populardescription,
+      this.randomdescription,
+      this.randomimagelist,
+      this.newRecipeID,
+      this.newdescription,
+      this.newimagelist,
       this.cookbook});
 }
 

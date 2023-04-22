@@ -51,7 +51,7 @@ class Description {
     String cookTime;
     String prepTime;
     String totalTime;
-    DateTime datePublished;
+    String datePublished;
     String description;
     String images;
     String recipeCategory;
@@ -73,6 +73,39 @@ class Description {
     String recipeYield;
     String recipeInstructions;
 
+    Map<String,dynamic> toMap(){
+      return {
+      'RecipeId': recipeId,
+      'Name': name,
+      'AuthorId': authorId,
+      'AuthorName': authorName,
+      'CookTime': cookTime,
+      'PrepTime': prepTime,
+      'TotalTime': totalTime,
+      'DatePublished': datePublished,
+      'Description': description,
+      'Images': images,
+      'RecipeCategory': recipeCategory,
+      'Keywords': keywords,
+      'RecipeIngredientQuantities': recipeIngredientQuantities,
+      'RecipeIngredientParts': recipeIngredientParts,
+      'AggregatedRating': aggregatedRating,
+      'ReviewCount': reviewCount,
+      'Calories': calories,
+      'FatContent': fatContent,
+      'SaturatedFatContent': saturatedFatContent,
+      'CholesterolContent': cholesterolContent,
+      'SodiumContent': sodiumContent,
+      'CarbohydrateContent': carbohydrateContent,
+      'FiberContent': fiberContent,
+      'SugarContent': sugarContent,
+      'ProteinContent': proteinContent,
+      'RecipeServings': recipeServings,
+      'RecipeYield': recipeYield,
+      'RecipeInstructions': recipeInstructions,
+    };
+   }
+
     factory Description.fromJson(Map<String, dynamic> json) => Description(
         recipeId: json["RecipeId"],
         name: json["Name"],
@@ -81,7 +114,9 @@ class Description {
         cookTime: json["CookTime"],
         prepTime: json["PrepTime"],
         totalTime: json["TotalTime"],
-        datePublished: DateTime.parse(json["DatePublished"]),
+        // datePublished: DateTime.parse(json["DatePublished"]),
+
+        datePublished: json["DatePublished"],
         description: json["Description"],
         images: json["Images"],
         recipeCategory: json["RecipeCategory"],

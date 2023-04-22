@@ -33,8 +33,8 @@ Future<List<String>?> getI(
   return images;
 }
 
-Future<Store> initializeApp(int id) async {
-  print("init: $id");
+Future<Store> Recommendations(int id) async {
+  print("User id: $id");
   Store store = Store();
   dynamic apiResult1;
   APIService apiService = APIService();
@@ -80,20 +80,32 @@ Future<Store> initializeApp(int id) async {
 
 Future<Store> getresults(List<String?> searchterm) async {
   Store store = Store();
-  dynamic Val;
+
   List<int> searchid = [];
 
-  int len = searchterm.length;
-
   APIService apiService = APIService();
-  Val = await apiService.getSearchResults(
+  dynamic val = await apiService.getSearchResults(
       searchterm[0]!, searchterm[1]!, searchterm[2]!);
 
-  Val.forEach((key, value) {
+  val.forEach((key, value) {
     searchid.add(value);
   });
   store.searchdescription = await getD(searchid);
   store.searchimagelist = await getI(store, store.searchdescription!);
   // print(store.searchdescription);
+  return store;
+}
+
+Future<Store> getcrecipes(String category) async {
+  Store store = Store();
+  List<int> categoryid = [];
+
+  APIService apiService = APIService();
+  dynamic val = await apiService.getcategoryrecipes(category);
+  val.forEach((key, value) {
+    categoryid.add(value);
+  });
+  store.categorydescription = await getD(categoryid);
+  store.categoryimagelist = await getI(store, store.categorydescription!);
   return store;
 }

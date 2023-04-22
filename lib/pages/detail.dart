@@ -1,15 +1,18 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:recipe/pages/cookbook.dart';
 
 import '../Bloc/CookBook_Bloc/recipe_cubit.dart';
 import '../model/GetDescription.dart';
+import '../model/firebasecollection.dart';
 
 class Details extends StatefulWidget {
-  Details({super.key, required this.store, required this.img});
+  Details({
+    super.key,
+    required this.store,
+    required this.img,
+  });
+
   final Description store;
   final String img;
 
@@ -18,16 +21,15 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> with TickerProviderStateMixin {
+  bool _showText = true;
   @override
   Widget build(BuildContext context) {
     TabController _tabcontrol = TabController(length: 2, vsync: this);
     // final scrollController = ScrollController();
 
     print(widget.store.runtimeType);
-    return BlocProvider(
-      create: (_) => RecipeCubit(),
-      child: SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: Scaffold(
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           // controller: scrollController,
@@ -167,34 +169,67 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                     ),
                                   ],
                                 ),
-                                TextButton(
-                                    style: TextButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      backgroundColor: Colors.grey.shade300,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        "Add to Fav",
-                                        style: TextStyle(
-                                            color: Colors.black87,
-                                            fontSize: 12.0),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      context
-                                          .read<RecipeCubit>()
-                                          .add(widget.store);
-
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => CookBook()),
-                                      );
-                                    })
+                                BlocBuilder<CookBookCubit,
+                                    Stream<Currentbook?>?>(
+                                  builder: (context, state) {
+                                    return StreamBuilder(
+                                        stream: state,
+                                        builder:
+                                            (context, AsyncSnapshot snapshot) {
+                                          return GestureDetector(
+                                            onTap: () async {
+                                              context
+                                                  .read<CookBookCubit>()
+                                                  .updateBook(widget.store,
+                                                      snapshot.data.favs ?? []);
+                                              setState(() {
+                                                _showText = !_showText;
+                                              });
+                                            },
+                                            child: Container(
+                                              width: 100,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                              ),
+                                              child: AnimatedSwitcher(
+                                                duration:
+                                                    Duration(milliseconds: 500),
+                                                transitionBuilder:
+                                                    (child, animation) {
+                                                  return ScaleTransition(
+                                                    scale: animation,
+                                                    child: child,
+                                                  );
+                                                },
+                                                child: _showText
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          'Add to fav',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                          key: ValueKey('text'),
+                                                        ),
+                                                      )
+                                                    : Icon(
+                                                        Icons.check,
+                                                        color: Colors.white,
+                                                        key: ValueKey('icon'),
+                                                      ),
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
+                                )
                               ],
                             ),
                             SizedBox(
@@ -296,7 +331,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                   // right: 15.0,
                                   bottom: 20.0),
                               child: SizedBox(
-                                height: 600,
+                                height: 1000,
                                 width: double.maxFinite,
                                 child: TabBarView(
                                     controller: _tabcontrol,
@@ -352,7 +387,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

@@ -1,25 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:recipe/model/Storagemodel.dart';
+import 'package:recipe/pages/cookBook.dart';
 
-import '../../authentication/authenticationServices.dart';
 import '../../model/GetDescription.dart';
 import '../../model/firebasecollection.dart';
 
-class UseridCubit extends Cubit<Stream<Userid?>?> {
-  UseridCubit() : super(null);
+class UseridCubit extends Cubit<Stream<Currentuserid>?> {
+  final String _fd;
+  UseridCubit(String fid)
+      : _fd = fid,
+        super(DatabaseService(fid: fid)
+            .currentID); //In the constructor of a Dart class, the colon : is used to initialize fields before the constructor body is executed.
 
-  final AuthService _auth = AuthService();
-  void login(String email, String password) async {
-    await _auth.signIn(email, password);
-    return emit(_auth.user);
+  void changeid(int newid) async {
+ 
+    await DatabaseService(fid: _fd).updateid(newid);
+    emit(DatabaseService(fid: _fd).currentID);
   }
 
-  void register(String email, String password) async {
-    await _auth.regwithEandP(email, password);
-    return emit(_auth.user);
-  }
-
-  void logout() async {
-    return emit(await _auth.signout());
-  }
 }
+
+
+

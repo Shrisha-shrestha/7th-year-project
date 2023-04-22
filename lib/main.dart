@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe/Bloc/CookBook_Bloc/recipe_cubit.dart';
 import 'package:recipe/Bloc/CookBook_Bloc/recipe_observer.dart';
 import 'package:recipe/helper/wrapper.dart';
-
-import 'package:recipe/model/Storagemodel.dart';
-// import 'package:recipe/home/homeprovider.dart';
-
-import 'package:recipe/pages/search.dart';
-import '../authentication/authenticationServices.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'Bloc/UserId_Bloc/userid_cubit.dart';
+import 'Bloc/FId_Bloc/fid_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MultiBlocProvider(
-      providers: [        
-        BlocProvider<UseridCubit>(
-          create: (BuildContext context) => UseridCubit(),
-        ),
-        BlocProvider<RecipeCubit>(
-          create: (BuildContext context) => RecipeCubit(),
+  runApp(MultiProvider(
+      providers: [
+        BlocProvider<FireidCubit>(
+          create: (BuildContext context) => FireidCubit(),
         ),
       ],
       child: MaterialApp(
@@ -41,7 +30,7 @@ void main() async {
           ),
           themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,
-          home: Material(child: MyApp()))));
+          home: Material(child: Terms()))));
 }
 
 class MyApp extends StatefulWidget {

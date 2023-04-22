@@ -50,7 +50,12 @@ class APIService {
   }
 
   Future<RecipeDescriptionResponseModel?> getdescription(
-      int? uid1, int? uid2, int? uid3, int? uid4, int? uid5,) async {
+    int? uid1,
+    int? uid2,
+    int? uid3,
+    int? uid4,
+    int? uid5,
+  ) async {
     String url =
         'http://10.0.2.2:8889/getrecipes?uid1=$uid1&uid2=$uid2&uid3=$uid3&uid4=$uid4&uid5=$uid5';
     final response = await http.get(
@@ -65,19 +70,32 @@ class APIService {
     }
   }
 
-  Future<Map> getSearchResults(String s1,String s2,String s3) async {
+  Future<Map> getSearchResults(String s1, String s2, String s3) async {
     String url = 'http://10.0.2.2:8889/searchrecipe?s1=$s1&s2=$s2&s3=$s3';
     final response = await http.get(
       Uri.parse(url),
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
-      Map responseModel =json.decode(response.body);
+      Map responseModel = json.decode(response.body);
       return responseModel;
-                                              } else {
+    } else {
       throw Exception('Error fetching data');
     }
   }
-}
 
-                             
+   Future<Map> getcategoryrecipes(String category) async {
+    String url = 'http://10.0.2.2:8889/getcategoryrecipe?c=$category';
+    final response = await http.get(
+      Uri.parse(url),
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      Map responseModel = json.decode(response.body);
+      return responseModel;
+    } else {
+      throw Exception('Error fetching data');
+    }    
+  }
+
+}

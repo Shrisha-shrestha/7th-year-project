@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Otp extends StatefulWidget {
-  const Otp({Key? key}) : super(key: key);
-
+  const Otp({required this.email});
+  final String email;
   @override
   _OtpState createState() => _OtpState();
 }
@@ -11,26 +11,15 @@ class _OtpState extends State<Otp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
           leading: TextButton(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  size: 13.0,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                Text(
-                  'Back',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                )
-              ],
+            child: Icon(
+              Icons.arrow_back_ios,
+              size: 13.0,
+              color: Theme.of(context).colorScheme.secondary,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -44,25 +33,25 @@ class _OtpState extends State<Otp> {
               height: 18,
             ),
             Container(
-              width: 280,
+              // width: 280,
               height: 100,
               child: Text(
-                textAlign: TextAlign.left,
-                'Enter the code \nto verify your phone',
+                textAlign: TextAlign.center,
+                'Enter the code to verify your phone',
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontSize: 30),
               ),
             ),
             Text(
-              'We have sent you an SMS with a code to the number +977 9813684840',
+              'We have sent you an email with a code to the email ${widget.email}',
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
             SizedBox(
               height: 10,
             ),
             Container(
-              padding: EdgeInsets.all(28),
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -70,7 +59,7 @@ class _OtpState extends State<Otp> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _textFieldOTP(first: true, last: false),
                       _textFieldOTP(first: false, last: false),
@@ -143,7 +132,7 @@ class _OtpState extends State<Otp> {
     return Container(
       height: 55,
       child: AspectRatio(
-        aspectRatio: 1.0,
+        aspectRatio: 0.8,
         child: TextField(
           autofocus: true,
           onChanged: (value) {
