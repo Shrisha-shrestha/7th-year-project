@@ -5,10 +5,12 @@ import 'package:shimmer/shimmer.dart';
 
 import '../Bloc/CookBook_Bloc/recipe_cubit.dart';
 import '../model/Storagemodel.dart';
+import 'detail.dart';
 
 class Rcategory extends StatefulWidget {
-  const Rcategory({super.key, required this.cat});
+  const Rcategory({super.key, required this.cat,required this.fid});
   final String cat;
+  final String fid;
 
   @override
   State<Rcategory> createState() => _RcategoryState();
@@ -93,28 +95,22 @@ class _RcategoryState extends State<Rcategory> {
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         BlocProvider<
-                              //             CookBookCubit>(
-                              //       create: (_) =>
-                              //           CookBookCubit(widget
-                              //               .fid
-                              //               .toString()),
-                              //       child: Details(
-                              //         store: snapshot
-                              //             .data!
-                              //             .searchdescription!
-                              //             .descriptions[index],
-                              //         img: snapshot.data!
-                              //                 .searchimagelist![
-                              //             index],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BlocProvider<CookBookCubit>(
+                                    create: (_) =>
+                                        CookBookCubit(widget.fid.toString()),
+                                    child: Details(
+                                      store: snapshot.data!.searchdescription!
+                                          .descriptions[index],
+                                      img: snapshot
+                                          .data!.searchimagelist![index],
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                                 // color: Theme.of(context).colorScheme.secondary,

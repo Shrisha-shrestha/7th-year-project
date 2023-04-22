@@ -8,8 +8,7 @@ class Terms extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-                backgroundColor: Theme.of(context).colorScheme.secondary,
-
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text('Terms and Conditions'),
         centerTitle: true,
       ),

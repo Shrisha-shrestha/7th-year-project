@@ -68,7 +68,7 @@ class _HomeState extends State<Home>
                       ),
                       Container(
                         alignment: Alignment.bottomLeft,
-                        color: Colors.black.withOpacity(0.3),
+                        color: Colors.black.withOpacity(0.4),
                         height: MediaQuery.of(context).size.height * 0.3,
                         width: MediaQuery.of(context).size.width,
                       ),
@@ -83,7 +83,7 @@ class _HomeState extends State<Home>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                '20 Weekend \nDinner Recipes',
+                                '10 Quick and Easy Recipes to Try Today',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 35,
@@ -877,7 +877,7 @@ class _HomeState extends State<Home>
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Rcategory(
-                                              cat: category.elementAt(index),
+                                              cat: category.elementAt(index),fid: widget.fid,
                                             )));
                               },
                               child: Column(

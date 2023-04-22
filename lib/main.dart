@@ -6,6 +6,7 @@ import 'package:recipe/helper/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Bloc/FId_Bloc/fid_cubit.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -30,7 +31,7 @@ void main() async {
           ),
           themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,
-          home: Material(child: Terms()))));
+          home: Material(child: MyApp()))));
 }
 
 class MyApp extends StatefulWidget {
@@ -47,20 +48,7 @@ class _MyAppState extends State<MyApp> {
     Bloc.observer = const RecipeObserver();
     return wrapper();
 
-    // return StreamProvider<Userid?>.value(
-    //     value: AuthService().user,
-    //     initialData: null,
-    //     catchError: (context, e) {
-    //       print('error in LocationModelNormal: ${e.toString()}');
-    //       //or pop a dialogue...whatever.
-    //       return null;
-    //     },
-    //     child: Search()
-    //     // home:ProfileScreen()
-    //     );
-
-    //     return ChangeNotifierProvider(
-    // create: (_) => SigningUser(),
-    // child:const ProfileScreen());
+    
   }
 }
+
