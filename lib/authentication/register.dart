@@ -17,6 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailcontroller = TextEditingController();
   final pwcontroller = TextEditingController();
   final idcontroller = TextEditingController();
+  final namecontroller = TextEditingController();
   bool _passwordVisible = false;
   bool isagreed = false;
 
@@ -144,6 +145,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                             .primary),
                                                   ),
                                                   labelText: 'ID',
+                                                  labelStyle: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                          .withOpacity(0.5)),
+                                                ),
+                                                onChanged: (val) {},
+                                                onSaved: (input) {},
+                                              ),
+                                              SizedBox(
+                                                height: 20.0,
+                                              ),
+                                              TextFormField(
+                                                autovalidateMode: val,
+                                                controller: namecontroller,
+                                                validator: (val) => val!.isEmpty
+                                                    ? 'Enter your name'
+                                                    : null,
+                                                decoration: InputDecoration(
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary),
+                                                  ),
+                                                  labelText: 'Full Name',
                                                   labelStyle: TextStyle(
                                                       color: Theme.of(context)
                                                           .colorScheme
@@ -340,7 +375,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                             emailcontroller
                                                                 .text,
                                                             pwcontroller.text,
-                                                            idcontroller.text);
+                                                            idcontroller.text,
+                                                            namecontroller
+                                                                .text);
                                                     setState(() {
                                                       load = false;
                                                     });

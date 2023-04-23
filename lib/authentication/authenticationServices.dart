@@ -36,17 +36,17 @@ class _TogglerState extends State<Toggler> {
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Userid? _userFromfireuser(User user) {
+  Userid? _userFromfireuser(User? user) {
     return user != null ? Userid(uid: user.uid) : null;
   }
 
   Stream<Userid?> get user {
     return _auth
         .authStateChanges()
-        .map((User? user) => _userFromfireuser(user!));
+        .map((User? user) => _userFromfireuser(user));
   }
 
-  Future regwithEandP(String email, String password, String id) async {
+  Future regwithEandP(String email, String password, String id,String Name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -55,7 +55,7 @@ class AuthService {
       await DatabaseService(fid: comingUser!.uid).updateid(int.parse(id));
       await DatabaseService(fid: comingUser.uid).updatecookbook([]);
       await DatabaseService(fid: comingUser.uid)
-          .updatepersonalinfo('Default Username');
+          .updatepersonalinfo(Name);
       return _userFromfireuser(comingUser);
     } catch (e) {
       print(e.toString());

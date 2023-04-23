@@ -103,10 +103,10 @@ class _RcategoryState extends State<Rcategory> {
                                     create: (_) =>
                                         CookBookCubit(widget.fid.toString()),
                                     child: Details(
-                                      store: snapshot.data!.searchdescription!
+                                      store: snapshot.data!.categorydescription!
                                           .descriptions[index],
                                       img: snapshot
-                                          .data!.searchimagelist![index],
+                                          .data!.categoryimagelist![index],
                                     ),
                                   ),
                                 ),

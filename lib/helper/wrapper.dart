@@ -27,14 +27,14 @@ class wrapper extends StatelessWidget {
         print('shris');
         return Toggler();
       } else {
-        // return Search();
-
         return StreamBuilder(
           stream: state,
-          initialData: null,
+          // initialData: null,
           builder: (context, AsyncSnapshot snapshot) {
+            // state.listen((event) {
+            //   print(event);
+            // });
             if (snapshot.hasData) {
-              // return HomeScreen(fid: snapshot.data!.uid.toString());
               return MultiBlocProvider(
                 providers: [
                   BlocProvider<CookBookCubit>(
@@ -43,8 +43,7 @@ class wrapper extends StatelessWidget {
                   BlocProvider<UseridCubit>(
                     create: (_) => UseridCubit(snapshot.data!.uid.toString()),
                   ),
-
-                   BlocProvider<PinfoCubit>(
+                  BlocProvider<PinfoCubit>(
                     create: (_) => PinfoCubit(snapshot.data!.uid.toString()),
                   ),
                 ],

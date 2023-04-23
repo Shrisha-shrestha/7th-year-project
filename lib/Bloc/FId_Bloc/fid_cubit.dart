@@ -7,7 +7,7 @@ import '../../model/firebasecollection.dart';
 
 class FireidCubit extends Cubit<Stream<Userid?>?> {
   FireidCubit() : super(
-            // AuthService().user
+            // AuthService().user 
             null
             ); //null iif not working
 
@@ -17,8 +17,8 @@ class FireidCubit extends Cubit<Stream<Userid?>?> {
     return emit(_auth.user);
   }
 
-  void register(String email, String password, String id) async {
-    await _auth.regwithEandP(email, password, id);
+  void register(String email, String password, String id,String name) async {
+    await _auth.regwithEandP(email, password, id,name);
     return emit(_auth.user);
   }
 

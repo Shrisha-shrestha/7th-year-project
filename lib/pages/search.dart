@@ -18,7 +18,8 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search>
     with AutomaticKeepAliveClientMixin<Search> {
   TextEditingController editingController = TextEditingController();
-
+  List<String> _searchHistory = [];
+  String _searchQuery = '';
   @override
   bool get wantKeepAlive => true;
   Future<Store>? future;
@@ -29,6 +30,7 @@ class _SearchState extends State<Search>
             body: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -76,6 +78,14 @@ class _SearchState extends State<Search>
                                         words.add('0');
                                         words.add('0');
                                         print(words);
+                                        setState(() {
+                                          _searchQuery = editingController.text;
+                                          if(_searchHistory.contains(_searchQuery))
+                                          {}
+                                          else
+                                          {_searchHistory.insert(
+                                              0, editingController.text);}
+                                        });
                                         value != null
                                             ? future = getresults(words)
                                             : null;
@@ -97,7 +107,72 @@ class _SearchState extends State<Search>
                               ),
                             ),
                             SizedBox(
-                              height: 25.0,
+                              height: 5.0,
+                            ),
+                            Container(
+                              height: 50,
+                              width: 500,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: _searchHistory.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _searchQuery = _searchHistory[index];
+                                        });
+
+                                        future = getresults(
+                                            [_searchQuery, '0', '0']);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(left: 5.0),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withOpacity(0.4),
+                                        ),
+                                        height: 65.0,
+                                        width: 100.0,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(_searchHistory[index]),
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.close,
+                                                size: 15,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  _searchHistory
+                                                      .removeAt(index);
+                                                  print(_searchHistory);
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.0,
                             ),
                             FutureBuilder(
                                 future: future,
@@ -236,12 +311,15 @@ class _SearchState extends State<Search>
                                               child: Card(
                                                 child: Container(
                                                     padding:
-                                                        const EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Row(
                                                       children: [
                                                         Container(
-                                                          margin: const EdgeInsets
-                                                              .only(right: 15.0),
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 15.0),
                                                           width: 100,
                                                           height: 100,
                                                           decoration:
@@ -250,14 +328,13 @@ class _SearchState extends State<Search>
                                                                       BorderRadius
                                                                           .circular(
                                                                               20),
-                                                                  color:
-                                                                      Colors.grey,
+                                                                  color: Colors
+                                                                      .grey,
                                                                   image:
                                                                       DecorationImage(
                                                                     fit: BoxFit
                                                                         .cover,
-                                                                    image: NetworkImage(snapshot.data!.searchimagelist![index].replaceAll(
-                                                                                '"',
+                                                                    image: NetworkImage(snapshot.data!.searchimagelist![index].replaceAll('"',
                                                                                 '') ==
                                                                             '0'
                                                                         ? 'https://us.123rf.com/450wm/surfupvector/surfupvector1908/surfupvector190802662/129243509-denied-art-line-icon-censorship-no-photo-no-image-available-reject-or-cancel-concept-vector.jpg?ver=6'
@@ -265,8 +342,7 @@ class _SearchState extends State<Search>
                                                                             .data!
                                                                             .searchimagelist![
                                                                                 index]
-                                                                            .replaceAll(
-                                                                                '"',
+                                                                            .replaceAll('"',
                                                                                 '')),
                                                                   )),
                                                         ),
@@ -288,8 +364,8 @@ class _SearchState extends State<Search>
                                                               style:
                                                                   const TextStyle(
                                                                 fontSize: 15,
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                               ),
                                                             ),
                                                             const SizedBox(
