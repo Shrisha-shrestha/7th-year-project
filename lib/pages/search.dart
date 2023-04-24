@@ -78,17 +78,18 @@ class _SearchState extends State<Search>
                                         words.add('0');
                                         words.add('0');
                                         print(words);
-                                        setState(() {
-                                          _searchQuery = editingController.text;
-                                          if(_searchHistory.contains(_searchQuery))
-                                          {}
-                                          else
-                                          {_searchHistory.insert(
-                                              0, editingController.text);}
-                                        });
                                         value != null
                                             ? future = getresults(words)
                                             : null;
+                                        setState(() {
+                                          _searchQuery = editingController.text;
+                                          if (_searchHistory
+                                              .contains(_searchQuery)) {
+                                          } else {
+                                            _searchHistory.insert(
+                                                0, editingController.text);
+                                          }
+                                        });
                                       },
                                       keyboardType: TextInputType.text,
                                       style: Theme.of(context)
@@ -124,9 +125,13 @@ class _SearchState extends State<Search>
                                         setState(() {
                                           _searchQuery = _searchHistory[index];
                                         });
-
-                                        future = getresults(
-                                            [_searchQuery, '0', '0']);
+                                        List<String?> words =
+                                            _searchQuery.split(" ");
+                                        words.add('0');
+                                        words.add('0');
+                                        words.add('0');
+                                        print(words);
+                                        future = getresults(words);
                                       },
                                       child: Container(
                                         padding: EdgeInsets.only(left: 5.0),
@@ -144,7 +149,7 @@ class _SearchState extends State<Search>
                                               .withOpacity(0.4),
                                         ),
                                         height: 65.0,
-                                        width: 100.0,
+                                        width: 155.0,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,

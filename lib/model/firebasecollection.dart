@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Currentuserid {
   final String? fid;
   final int userid;
-  Currentuserid({this.fid, required this.userid});
+  final String role;
+  Currentuserid({this.fid, required this.userid,required this.role});
 }
 
 class Currentbook {
@@ -29,8 +30,11 @@ class DatabaseService {
   final CollectionReference personalinfocollection =
       FirebaseFirestore.instance.collection('Personal_Info');
 
-  Future updateid(int? id) async {
-    return await usercollection.doc(fid).set({'id': id});
+
+
+
+  Future updateid(int? id,String? role) async {
+    return await usercollection.doc(fid).set({'id': id,'role':role});
   }
 
   Future updatecookbook(List? favs) async {
@@ -47,7 +51,7 @@ class DatabaseService {
   }
 
   Currentuserid _idupdater(DocumentSnapshot snapshot) {
-    return Currentuserid(fid: fid, userid: snapshot.get('id'));
+    return Currentuserid(fid: fid, userid: snapshot.get('id'),role: snapshot.get('role'));
   }
 
   Stream<Currentbook> get currentbook {
@@ -66,3 +70,5 @@ class DatabaseService {
     return Currentpinfo(fid: fid, name: snapshot.get('Name'));
   }
 }
+
+

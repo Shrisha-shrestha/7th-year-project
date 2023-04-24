@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe/Splash/loading.dart';
 import 'package:recipe/pages/cookBook.dart';
 import 'package:recipe/pages/profile.dart';
+import '../Bloc/UserId_Bloc/userid_cubit.dart';
 import '../helper/wrapper.dart';
 import '../model/Storagemodel.dart';
+import '../model/firebasecollection.dart';
 import '../pages/cookBook.dart';
+import '../pages/dashboard.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
 
@@ -61,12 +66,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         );
 
-    return Scaffold(
-      bottomNavigationBar: _bottomNavigationBar(selectedindex),
-      body: PageStorage(
-        child: pages[selectedindex],
-        bucket: bucket,
-      ),
+    return BlocBuilder<UseridCubit, Stream<Currentuserid?>?>(
+      builder: (context, state) {
+        return StreamBuilder(
+            stream: state,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                Currentuserid? ud = snapshot.data;
+                String role = ud!.role;
+                if (role == 'Client') {
+                  return Scaffold(
+                    bottomNavigationBar: _bottomNavigationBar(selectedindex),
+                    body: PageStorage(
+                      child: pages[selectedindex],
+                      bucket: bucket,
+                    ),
+                  );
+                } else {
+                  return Dashboard(
+        fid: widget.fid,
+      );
+                }
+              } else {
+                return Loading();
+              }
+            });
+      },
     );
   }
 }

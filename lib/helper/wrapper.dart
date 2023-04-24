@@ -47,7 +47,7 @@ class wrapper extends StatelessWidget {
                     create: (_) => PinfoCubit(snapshot.data!.uid.toString()),
                   ),
                 ],
-                child: HomeScreen(fid: snapshot.data!.uid.toString()),
+                child: HomeScreen(fid: snapshot.data!.uid.toString(),),
               );
               // return Test(fid: snapshot.data!.uid.toString());
             } else {

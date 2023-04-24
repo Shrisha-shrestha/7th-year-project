@@ -24,7 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   AutovalidateMode val = AutovalidateMode.disabled;
   String error = '';
   bool load = false;
-
+  List<String> roles = ['Admin', 'Client'];
+  String? dropdownvalue;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -153,6 +154,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 ),
                                                 onChanged: (val) {},
                                                 onSaved: (input) {},
+                                              ),
+                                              SizedBox(
+                                                height: 20.0,
+                                              ),
+                                              DropdownButtonFormField(
+                                                validator: (val) => val == null
+                                                    ? 'Select a role please'
+                                                    : null,
+                                                menuMaxHeight: 250.0,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Role',
+                                                  labelStyle: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                          .withOpacity(0.5)),
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary),
+                                                  ),
+                                                ),
+                                                value: dropdownvalue,
+                                                icon: const Icon(
+                                                  Icons.arrow_drop_down,
+                                                  color: Colors.grey,
+                                                ),
+                                                items: roles.map((String val) {
+                                                  return DropdownMenuItem(
+                                                    alignment: Alignment.center,
+                                                    value: val,
+                                                    child: Text(
+                                                      val,
+                                                      style:TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                    ),
+                                                  ));
+                                                }).toList(),
+                                                onChanged: (newValue) {
+                                                   dropdownvalue = newValue!;
+                                                },
+                                                onSaved: (value) {
+                                                   dropdownvalue = value!;
+                                                },
                                               ),
                                               SizedBox(
                                                 height: 20.0,
@@ -377,7 +433,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                             pwcontroller.text,
                                                             idcontroller.text,
                                                             namecontroller
-                                                                .text);
+                                                                .text,dropdownvalue!);
                                                     setState(() {
                                                       load = false;
                                                     });

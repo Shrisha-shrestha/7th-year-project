@@ -1,5 +1,10 @@
+
+
+import 'package:firebase_admin/firebase_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_admin/firebase_admin.dart' as admin;
+
 import 'package:provider/provider.dart';
 import 'package:recipe/Bloc/CookBook_Bloc/recipe_observer.dart';
 import 'package:recipe/helper/wrapper.dart';
@@ -10,6 +15,20 @@ import 'Bloc/FId_Bloc/fid_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  var credential = Credentials.applicationDefault();
+  credential ??= await Credentials.login();
+  var projectId = 'some-project';
+  var app = FirebaseAdmin.instance.initializeApp(AppOptions(
+      credential: credential,
+      projectId: projectId,
+      storageBucket: '$projectId.appspot.com'));
+ try {
+    // get a user by email
+    var v = await app.auth().getUserByEmail('sri@gmail.com');
+    print(v.toJson());
+  } catch (e) {
+    print(e);
+  }
   runApp(MultiProvider(
       providers: [
         BlocProvider<FireidCubit>(

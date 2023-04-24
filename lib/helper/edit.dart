@@ -75,9 +75,11 @@ class _changeState extends State<change> {
                             if (_formkey.currentState!.validate()) {
                               // await DatabaseService(fid: user.fid)
                               //     .updateid(id ?? ud.userid);
-                              context
-                                  .read<UseridCubit>()
-                                  .changeid(id ?? ud.userid);
+                              // context
+                              //     .read<UseridCubit>()
+                              //     .changeid(id!,);
+                                    await DatabaseService(fid: user.fid).updateid(id!,'Client');
+
                               Navigator.pop(context);
                             }
                           },

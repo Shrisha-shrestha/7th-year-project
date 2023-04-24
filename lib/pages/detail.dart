@@ -368,7 +368,8 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                             .replaceAll('c(', '')
                                             .replaceAll(')', '')
                                             .replaceAll('"', '')
-                                            .replaceAll('",', ''),
+                                            .replaceAll('",', '')
+                                            .replaceAll(RegExp(r'[,\.][,\.]'), '.'),
                                         textAlign: TextAlign.justify,
                                         // maxLines: 20,
                                         style: TextStyle(
