@@ -382,47 +382,33 @@ class _HomeState extends State<Home>
                                                             BorderRadius
                                                                 .circular(20)),
                                                   ),
-                                                  // Positioned(
-                                                  //   bottom: 20.0,
-                                                  //   right: 20.0,
-                                                  //   child: GestureDetector(
-                                                  //     onTap: () {
-                                                  //       //   setState(() {
-                                                  //       //     selectedindex1=index;
-                                                  //       //   });},
-                                                  //       // onDoubleTap:(){
-                                                  //       //   setState(() {
-                                                  //       //     selectedindex1=8;
-                                                  //       //   });
-                                                  //     },
-                                                  //     child: Container(
-                                                  //       padding:
-                                                  //           const EdgeInsets
-                                                  //               .all(2),
-                                                  //       height: 30,
-                                                  //       width: 30,
-                                                  //       decoration:
-                                                  //           BoxDecoration(
-                                                  //         border:
-                                                  //             Border.all(
-                                                  //           color: Colors
-                                                  //               .white,
-                                                  //         ),
-                                                  //         shape: BoxShape
-                                                  //             .circle,
-                                                  //         color:
-                                                  //             Colors.white,
-                                                  //       ),
-                                                  //       child: const Icon(
-                                                  //         Icons
-                                                  //             .favorite_border_rounded,
-                                                  //         size: 20.0,
-                                                  //         color:
-                                                  //             Colors.black,
-                                                  //       ),
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
+                                                  Positioned(
+                                                      top: 10.0,
+                                                      right: 28.0,
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors
+                                                                .amber[200],
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20)),
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        child: Text(
+                                                          snapshot
+                                                              .data!
+                                                              .user_predictions![
+                                                                  index]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      )),
                                                   Positioned(
                                                     bottom: 20,
                                                     left: 10,
@@ -877,7 +863,8 @@ class _HomeState extends State<Home>
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Rcategory(
-                                              cat: category.elementAt(index),fid: widget.fid,
+                                              cat: category.elementAt(index),
+                                              fid: widget.fid,
                                             )));
                               },
                               child: Column(

@@ -46,16 +46,16 @@ class AuthService {
         .map((User? user) => _userFromfireuser(user));
   }
 
-  Future regwithEandP(String email, String password, String id,String Name,String role) async {
+  Future regwithEandP(String email, String password, String id,String Name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? comingUser = result.user;
 
-      await DatabaseService(fid: comingUser!.uid).updateid(int.parse(id),role);
+      await DatabaseService(fid: comingUser!.uid).updateid(int.parse(id));
       await DatabaseService(fid: comingUser.uid).updatecookbook([]);
-      await DatabaseService(fid: comingUser.uid)
-          .updatepersonalinfo(Name);
+      await DatabaseService(fid: comingUser.uid).updatepersonalinfo(Name);
+     await DatabaseService(fid: comingUser.uid).updatemyrecipe([]);
       return _userFromfireuser(comingUser);
     } catch (e) {
       print(e.toString());

@@ -7,7 +7,9 @@ import 'GetDescription.dart';
 class Store {
   List<int>? popularRecipeID;
   List<int>? modelRecipeID;
+  List? user_predictions;
   List<int>? newRecipeID;
+
 
   List<String>? popularimagelist;
   List<String>? modelimagelist;

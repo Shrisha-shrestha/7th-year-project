@@ -1,0 +1,540 @@
+@startuml
+set namespaceSeparator ::
+
+class "recipe::API::API_connection.dart::APIService" {
+  +Future<RecipeIdResponseModel?> get_recipe_id()
+  +Future<ModelBasedResponsemodel?> get_recipe_id2()
+  +Future<NewRecipeResponseModel?> get_recipe_id3()
+  +Future<RecipeDescriptionResponseModel?> getdescription()
+  +Future<Map<dynamic, dynamic>> getSearchResults()
+  +Future<Map<dynamic, dynamic>> getcategoryrecipes()
+}
+
+class "recipe::authentication::authenticationServices.dart::Toggler" {
+  +State<Toggler> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::authentication::authenticationServices.dart::Toggler"
+
+class "recipe::authentication::authenticationServices.dart::_TogglerState" {
+  +bool showsignin
+  +void toggle()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::authentication::authenticationServices.dart::_TogglerState"
+
+class "recipe::authentication::authenticationServices.dart::AuthService" {
+  -FirebaseAuth _auth
+  +Stream<Userid?> user
+  -Userid? _userFromfireuser()
+  +Future<dynamic> regwithEandP()
+  +Future<dynamic> signIn()
+  +Future<void> resetPassword()
+  +Future<dynamic> signout()
+}
+
+"recipe::authentication::authenticationServices.dart::AuthService" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"recipe::authentication::authenticationServices.dart::AuthService" o-- "dart::async::Stream<Userid>"
+
+class "recipe::authentication::forgot_password.dart::Otp" {
+  +String email
+  +_OtpState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::authentication::forgot_password.dart::Otp"
+
+class "recipe::authentication::forgot_password.dart::_OtpState" {
+  +Widget build()
+  -Widget _textFieldOTP()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::authentication::forgot_password.dart::_OtpState"
+
+class "recipe::authentication::login.dart::LoginScreen" {
+  +Function toogle
+  +State<LoginScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::authentication::login.dart::LoginScreen"
+
+class "recipe::authentication::login.dart::_LoginScreenState" {
+  +bool load
+  -bool _passwordVisible
+  +String error
+  +AutovalidateMode val
+  +bool isEnabled
+  +TextEditingController emailcontroller
+  +TextEditingController pwcontroller
+  +Duration animationDuration
+  -GlobalKey<FormState> _formkey
+  +void initState()
+  -void _getSP()
+  +Widget build()
+}
+
+"recipe::authentication::login.dart::_LoginScreenState" o-- "flutter::src::widgets::form.dart::AutovalidateMode"
+"recipe::authentication::login.dart::_LoginScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"recipe::authentication::login.dart::_LoginScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::authentication::login.dart::_LoginScreenState"
+
+class "recipe::authentication::register.dart::RegisterScreen" {
+  +Function toogle
+  +State<RegisterScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::authentication::register.dart::RegisterScreen"
+
+class "recipe::authentication::register.dart::_RegisterScreenState" {
+  +TextEditingController emailcontroller
+  +TextEditingController pwcontroller
+  +TextEditingController idcontroller
+  +TextEditingController namecontroller
+  -bool _passwordVisible
+  +bool isagreed
+  +AutovalidateMode val
+  +String error
+  +bool load
+  -GlobalKey<FormState> _formkey
+  +Widget build()
+}
+
+"recipe::authentication::register.dart::_RegisterScreenState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"recipe::authentication::register.dart::_RegisterScreenState" o-- "flutter::src::widgets::form.dart::AutovalidateMode"
+"recipe::authentication::register.dart::_RegisterScreenState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::authentication::register.dart::_RegisterScreenState"
+
+class "recipe::Bloc::CookBook_Bloc::recipe_cubit.dart::CookBookCubit" {
+  -String _fd
+  +void updateBook()
+  +void removeFrmBook()
+}
+
+"bloc::src::cubit.dart::Cubit" <|-- "recipe::Bloc::CookBook_Bloc::recipe_cubit.dart::CookBookCubit"
+
+class "recipe::Bloc::CookBook_Bloc::recipe_observer.dart::RecipeObserver" {
+  +void onChange()
+}
+
+"bloc::src::bloc_observer.dart::BlocObserver" <|-- "recipe::Bloc::CookBook_Bloc::recipe_observer.dart::RecipeObserver"
+
+class "recipe::Bloc::FId_Bloc::fid_cubit.dart::FireidCubit" {
+  -AuthService _auth
+  +void login()
+  +void register()
+  +void forgotpw()
+  +void logout()
+}
+
+"recipe::Bloc::FId_Bloc::fid_cubit.dart::FireidCubit" o-- "recipe::authentication::authenticationServices.dart::AuthService"
+"bloc::src::cubit.dart::Cubit" <|-- "recipe::Bloc::FId_Bloc::fid_cubit.dart::FireidCubit"
+
+class "recipe::Bloc::Myrecipes_bloc::mrecipe_cubit.dart::MyRecipeCubit" {
+  -String _fd
+  +void update()
+  +void remove()
+}
+
+"bloc::src::cubit.dart::Cubit" <|-- "recipe::Bloc::Myrecipes_bloc::mrecipe_cubit.dart::MyRecipeCubit"
+
+class "recipe::Bloc::PInfo_Bloc::pinfo_cubit.dart::PinfoCubit" {
+  -String _fd
+  +void changename()
+}
+
+"bloc::src::cubit.dart::Cubit" <|-- "recipe::Bloc::PInfo_Bloc::pinfo_cubit.dart::PinfoCubit"
+
+class "recipe::Bloc::Userid_Bloc::userid_cubit.dart::UseridCubit" {
+  -String _fd
+  +void changeid()
+}
+
+"bloc::src::cubit.dart::Cubit" <|-- "recipe::Bloc::Userid_Bloc::userid_cubit.dart::UseridCubit"
+
+class "recipe::customwidgets::myrecipeimage.dart::CustomImageFormField" {
+}
+
+"flutter::src::widgets::form.dart::FormField" <|-- "recipe::customwidgets::myrecipeimage.dart::CustomImageFormField"
+
+class "recipe::customwidgets::myrecipetextfield.dart::CustomField" {
+  +AutovalidateMode val
+  +String Name
+  +TextEditingController controller
+  +State<CustomField> createState()
+}
+
+"recipe::customwidgets::myrecipetextfield.dart::CustomField" o-- "flutter::src::widgets::form.dart::AutovalidateMode"
+"recipe::customwidgets::myrecipetextfield.dart::CustomField" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::customwidgets::myrecipetextfield.dart::CustomField"
+
+class "recipe::customwidgets::myrecipetextfield.dart::_CustomFieldState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::customwidgets::myrecipetextfield.dart::_CustomFieldState"
+
+class "recipe::helper::aboutapp.dart::About" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "recipe::helper::aboutapp.dart::About"
+
+class "recipe::helper::edit.dart::changeid" {
+  +Currentuserid? idclass
+  +State<changeid> createState()
+}
+
+"recipe::helper::edit.dart::changeid" o-- "recipe::model::firebasecollection.dart::Currentuserid"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::helper::edit.dart::changeid"
+
+class "recipe::helper::edit.dart::_changeidState" {
+  +int? id
+  -GlobalKey<FormState> _formkey
+  +Widget build()
+}
+
+"recipe::helper::edit.dart::_changeidState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::helper::edit.dart::_changeidState"
+
+class "recipe::helper::edit2.dart::changeName" {
+  +Currentpinfo? nameclass
+  +State<changeName> createState()
+}
+
+"recipe::helper::edit2.dart::changeName" o-- "recipe::model::firebasecollection.dart::Currentpinfo"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::helper::edit2.dart::changeName"
+
+class "recipe::helper::edit2.dart::_changeNameState" {
+  +String? name
+  -GlobalKey<FormState> _formkey
+  +Widget build()
+}
+
+"recipe::helper::edit2.dart::_changeNameState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::helper::edit2.dart::_changeNameState"
+
+class "recipe::helper::privacy.dart::Privacy" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "recipe::helper::privacy.dart::Privacy"
+
+class "recipe::helper::Terms.dart::Terms" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "recipe::helper::Terms.dart::Terms"
+
+class "recipe::helper::viewmore.dart::More" {
+  +State<More> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::helper::viewmore.dart::More"
+
+class "recipe::helper::viewmore.dart::_MoreState" {
+  +List<String> head
+  +List<String> body
+  +List<String> image
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::helper::viewmore.dart::_MoreState"
+
+class "recipe::helper::wrapper.dart::wrapper" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "recipe::helper::wrapper.dart::wrapper"
+
+class "recipe::home::homeprovider.dart::HomeScreen" {
+  +String fid
+  +State<HomeScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::home::homeprovider.dart::HomeScreen"
+
+class "recipe::home::homeprovider.dart::_HomeScreenState" {
+  +int selectedindex
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::home::homeprovider.dart::_HomeScreenState"
+
+class "recipe::main.dart::MyApp" {
+  +State<MyApp> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::main.dart::MyApp"
+
+class "recipe::main.dart::_MyAppState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::main.dart::_MyAppState"
+
+class "recipe::model::firebasecollection.dart::Currentuserid" {
+  +String? fid
+  +int userid
+}
+
+class "recipe::model::firebasecollection.dart::Currentbook" {
+  +String? fid
+  +List<dynamic>? favs
+}
+
+class "recipe::model::firebasecollection.dart::Currentpinfo" {
+  +String? fid
+  +String name
+}
+
+class "recipe::model::firebasecollection.dart::CurrentMyrecipe" {
+  +String? fid
+  +List<dynamic>? mrecipes
+}
+
+class "recipe::model::firebasecollection.dart::DatabaseService" {
+  +String? fid
+  +CollectionReference<Object?> usercollection
+  +CollectionReference<Object?> cookbookcollection
+  +CollectionReference<Object?> personalinfocollection
+  +CollectionReference<Object?> myrecipecollection
+  +Stream<Currentuserid> currentID
+  +Stream<Currentbook> currentbook
+  +Stream<Currentpinfo> current_pinfo
+  +Stream<CurrentMyrecipe> current_mrecipe
+  +Future<dynamic> updateid()
+  +Future<dynamic> updatecookbook()
+  +Future<dynamic> updatepersonalinfo()
+  +Future<dynamic> updatemyrecipe()
+  -Currentuserid _idupdater()
+  -Currentbook _bookupdater()
+  -Currentpinfo _pinfoupdater()
+  -CurrentMyrecipe _mrecipeupdater()
+}
+
+"recipe::model::firebasecollection.dart::DatabaseService" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+"recipe::model::firebasecollection.dart::DatabaseService" o-- "dart::async::Stream<Currentuserid>"
+"recipe::model::firebasecollection.dart::DatabaseService" o-- "dart::async::Stream<Currentbook>"
+"recipe::model::firebasecollection.dart::DatabaseService" o-- "dart::async::Stream<Currentpinfo>"
+"recipe::model::firebasecollection.dart::DatabaseService" o-- "dart::async::Stream<CurrentMyrecipe>"
+
+class "recipe::model::GetDescription.dart::RecipeDescriptionResponseModel" {
+  +List<Description> descriptions
+}
+
+class "recipe::model::GetDescription.dart::Description" {
+  +String recipeId
+  +String name
+  +String authorId
+  +String authorName
+  +String cookTime
+  +String prepTime
+  +String totalTime
+  +String datePublished
+  +String description
+  +String images
+  +String recipeCategory
+  +String keywords
+  +String recipeIngredientQuantities
+  +String recipeIngredientParts
+  +String aggregatedRating
+  +String reviewCount
+  +String calories
+  +String fatContent
+  +String saturatedFatContent
+  +String cholesterolContent
+  +String sodiumContent
+  +String carbohydrateContent
+  +String fiberContent
+  +String sugarContent
+  +String proteinContent
+  +String recipeServings
+  +String recipeYield
+  +String recipeInstructions
+  +Map<String, dynamic> toMap()
+}
+
+class "recipe::model::GetModelRecipeId.dart::ModelBasedResponsemodel" {
+  +Map<String, double> userRatings
+  +Map<String, double> userPredictions
+}
+
+class "recipe::model::GetPopularRecipeId.dart::RecipeIdResponseModel" {
+  +Map<String, int> recipeId
+}
+
+class "recipe::model::Storagemodel.dart::Store" {
+  +List<int>? popularRecipeID
+  +List<int>? modelRecipeID
+  +List<int>? newRecipeID
+  +List<String>? popularimagelist
+  +List<String>? modelimagelist
+  +List<String>? newimagelist
+  +List<String>? searchimagelist
+  +List<String>? randomimagelist
+  +List<String>? categoryimagelist
+  +RecipeDescriptionResponseModel? populardescription
+  +RecipeDescriptionResponseModel? modeldescription
+  +RecipeDescriptionResponseModel? newdescription
+  +RecipeDescriptionResponseModel? searchdescription
+  +RecipeDescriptionResponseModel? randomdescription
+  +RecipeDescriptionResponseModel? categorydescription
+  +RecipeDescriptionResponseModel? cookbook
+  +String? firebaseID
+}
+
+"recipe::model::Storagemodel.dart::Store" o-- "recipe::model::GetDescription.dart::RecipeDescriptionResponseModel"
+
+class "recipe::model::Storagemodel.dart::Userid" {
+  +String? uid
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "recipe::model::Storagemodel.dart::Userid"
+
+class "recipe::pages::addRecipe.dart::AddRecipes" {
+  +State<AddRecipes> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::addRecipe.dart::AddRecipes"
+
+class "recipe::pages::addRecipe.dart::_AddRecipesState" {
+  +AutovalidateMode val
+  -GlobalKey<FormState> _formkey
+  +TextEditingController namecontroller
+  +TextEditingController Descriptioncontroller
+  +TextEditingController Imagecontroller
+  +TextEditingController Servingscontroller
+  +TextEditingController PrepTimecontroller
+  +TextEditingController CookTimecontroller
+  +TextEditingController Ingredientscontroller
+  +TextEditingController Instructionscontroller
+  +File? image
+  +Widget build()
+}
+
+"recipe::pages::addRecipe.dart::_AddRecipesState" o-- "flutter::src::widgets::form.dart::AutovalidateMode"
+"recipe::pages::addRecipe.dart::_AddRecipesState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"recipe::pages::addRecipe.dart::_AddRecipesState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"recipe::pages::addRecipe.dart::_AddRecipesState" o-- "dart::io::File"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::addRecipe.dart::_AddRecipesState"
+
+class "recipe::pages::category.dart::Rcategory" {
+  +String cat
+  +String fid
+  +State<Rcategory> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::category.dart::Rcategory"
+
+class "recipe::pages::category.dart::_RcategoryState" {
+  +Future<Store>? future
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::category.dart::_RcategoryState"
+
+class "recipe::pages::cookBook.dart::CookBook" {
+  +String fid
+  +State<CookBook> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::cookBook.dart::CookBook"
+
+class "recipe::pages::cookBook.dart::_CookBookState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::cookBook.dart::_CookBookState"
+
+class "recipe::pages::detail.dart::Details" {
+  +Description store
+  +String img
+  +State<Details> createState()
+}
+
+"recipe::pages::detail.dart::Details" o-- "recipe::model::GetDescription.dart::Description"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::detail.dart::Details"
+
+class "recipe::pages::detail.dart::_DetailsState" {
+  -bool _showText
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::detail.dart::_DetailsState"
+"flutter::src::widgets::ticker_provider.dart::TickerProviderStateMixin" <|-- "recipe::pages::detail.dart::_DetailsState"
+
+class "recipe::pages::home.dart::Home" {
+  +String fid
+  +State<Home> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::home.dart::Home"
+
+class "recipe::pages::home.dart::_HomeState" {
+  +Future<Store>? future
+  +List<String> category
+  +bool wantKeepAlive
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::home.dart::_HomeState"
+"flutter::src::widgets::ticker_provider.dart::TickerProviderStateMixin" <|-- "recipe::pages::home.dart::_HomeState"
+"flutter::src::widgets::automatic_keep_alive.dart::AutomaticKeepAliveClientMixin" <|-- "recipe::pages::home.dart::_HomeState"
+
+class "recipe::pages::MyRecipes.dart::MyRecipes" {
+  +String fid
+  +State<MyRecipes> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::MyRecipes.dart::MyRecipes"
+
+class "recipe::pages::MyRecipes.dart::_MyRecipesState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::MyRecipes.dart::_MyRecipesState"
+
+class "recipe::pages::profile.dart::ProfileScreen" {
+  +String fid
+  +State<ProfileScreen> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::profile.dart::ProfileScreen"
+
+class "recipe::pages::profile.dart::_ProfileScreenState" {
+  +String id
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::profile.dart::_ProfileScreenState"
+
+class "recipe::pages::search.dart::Search" {
+  +String fid
+  +State<Search> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "recipe::pages::search.dart::Search"
+
+class "recipe::pages::search.dart::_SearchState" {
+  +TextEditingController editingController
+  -List<String> _searchHistory
+  -String _searchQuery
+  +Future<Store>? future
+  +bool wantKeepAlive
+  +Widget build()
+}
+
+"recipe::pages::search.dart::_SearchState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "recipe::pages::search.dart::_SearchState"
+"flutter::src::widgets::automatic_keep_alive.dart::AutomaticKeepAliveClientMixin" <|-- "recipe::pages::search.dart::_SearchState"
+
+class "recipe::Splash::loading.dart::Loading" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "recipe::Splash::loading.dart::Loading"
+
+
+@enduml

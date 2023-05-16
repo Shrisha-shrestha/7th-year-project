@@ -17,8 +17,8 @@ class FireidCubit extends Cubit<Stream<Userid?>?> {
     return emit(_auth.user);
   }
 
-  void register(String email, String password, String id,String name,String role) async {
-    await _auth.regwithEandP(email, password, id,name,role);
+  void register(String email, String password, String id,String name) async {
+    await _auth.regwithEandP(email, password, id,name);
     return emit(_auth.user);
   }
 

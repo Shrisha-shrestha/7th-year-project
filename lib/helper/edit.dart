@@ -7,15 +7,15 @@ import '../model/firebasecollection.dart';
 import 'package:recipe/model/Storagemodel.dart';
 import '../authentication/authenticationServices.dart';
 
-class change extends StatefulWidget {
-  change({super.key, required this.idclass});
+class changeid extends StatefulWidget {
+  changeid({super.key, required this.idclass});
   final Currentuserid? idclass;
 
   @override
-  State<change> createState() => _changeState();
+  State<changeid> createState() => _changeidState();
 }
 
-class _changeState extends State<change> {
+class _changeidState extends State<changeid> {
   int? id;
   final _formkey = GlobalKey<FormState>();
   @override
@@ -73,12 +73,11 @@ class _changeState extends State<change> {
                           ),
                           onPressed: () async {
                             if (_formkey.currentState!.validate()) {
-                              // await DatabaseService(fid: user.fid)
-                              //     .updateid(id ?? ud.userid);
+                              await DatabaseService(fid: user.fid)
+                                  .updateid(id ?? ud.userid);
                               // context
                               //     .read<UseridCubit>()
-                              //     .changeid(id!,);
-                                    await DatabaseService(fid: user.fid).updateid(id!,'Client');
+                              //     .changeid(id ?? ud.userid);
 
                               Navigator.pop(context);
                             }

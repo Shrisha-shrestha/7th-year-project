@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe/Bloc/FId_Bloc/fid_cubit.dart';
+import 'package:recipe/Bloc/Myrecipes_bloc/mrecipe_cubit.dart';
 import 'package:recipe/Bloc/PInfo_Bloc/pinfo_cubit.dart';
 import 'package:recipe/Bloc/UserId_Bloc/userid_cubit.dart';
 import 'package:recipe/Splash/loading.dart';
@@ -45,6 +46,9 @@ class wrapper extends StatelessWidget {
                   ),
                   BlocProvider<PinfoCubit>(
                     create: (_) => PinfoCubit(snapshot.data!.uid.toString()),
+                  ),
+                  BlocProvider<MyRecipeCubit>(
+                    create: (_) => MyRecipeCubit(snapshot.data!.uid.toString()),
                   ),
                 ],
                 child: HomeScreen(fid: snapshot.data!.uid.toString(),),

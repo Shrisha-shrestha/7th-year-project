@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe/Bloc/Myrecipes_bloc/mrecipe_cubit.dart';
 import 'package:recipe/Bloc/PInfo_Bloc/pinfo_cubit.dart';
 import 'package:recipe/Bloc/UserId_Bloc/userid_cubit.dart';
 import 'package:recipe/Splash/loading.dart';
@@ -9,6 +10,7 @@ import 'package:recipe/authentication/login.dart';
 import 'package:recipe/helper/aboutapp.dart';
 import 'package:recipe/home/homeprovider.dart';
 import 'package:recipe/model/Storagemodel.dart';
+import 'package:recipe/pages/addRecipe.dart';
 import 'package:recipe/pages/home.dart';
 
 import '../Bloc/FId_Bloc/fid_cubit.dart';
@@ -16,6 +18,7 @@ import '../authentication/authenticationServices.dart';
 import '../helper/edit.dart';
 import '../helper/edit2.dart';
 import '../model/firebasecollection.dart';
+import 'MyRecipes.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key, required this.fid});
@@ -37,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: BlocProvider<UseridCubit>.value(
                   value: UseridCubit(widget.fid.toString()),
-                  child: change(idclass: user)),
+                  child: changeid(idclass: user)),
             );
           });
     }
@@ -50,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               child: BlocProvider<PinfoCubit>.value(
                   value: PinfoCubit(widget.fid.toString()),
-                  child: change2(nameclass: info)),
+                  child: changeName(nameclass: info)),
             );
           });
     }
@@ -302,6 +305,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           child: ListTile(
                             onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          BlocProvider<MyRecipeCubit>.value(
+                                              value: MyRecipeCubit(
+                                                  widget.fid.toString()),
+                                              child: MyRecipes(
+                                                fid: widget.fid,
+                                              ))));
+                            },
+                            leading: CircleAvatar(
+                                radius: 16.0,
+                                backgroundColor: Colors.amber.withOpacity(0.5),
+                                child: Icon(
+                                  Icons.book,
+                                  size: 15.0,
+                                  color: Colors.black,
+                                )),
+                            title: Text('My Recipes'),
+                            // trailing: Icon(Icons.more_vert),
+                          ),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25.0, vertical: 8.0),
+                        child: Container(
+                          decoration: new BoxDecoration(
+                            borderRadius: new BorderRadius.circular(10.0),
+                            color: Colors.white,
+                            boxShadow: [
+                              new BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 3.0,
+                                  offset: new Offset(1.0, 1.0))
+                            ],
+                          ),
+                          child: ListTile(
+                            onTap: () {
                               context.read<FireidCubit>().logout();
                             },
                             leading: CircleAvatar(
@@ -325,12 +369,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
         },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-          
-      //   },
-      //   child: Icon(Icons.messenger_outline_outlined),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BlocProvider<MyRecipeCubit>.value(
+                      value: MyRecipeCubit(widget.fid.toString()),
+                      child: AddRecipes())));
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

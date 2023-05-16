@@ -51,20 +51,6 @@ Future<Store> Recommendations(int id) async {
   // Get popular recipe's images
   store.popularimagelist = await getI(store, store.populardescription!);
 
-  //get model based recommended recipe's id
-  dynamic apiResult2;
-  List<int>? recipeId2 = [];
-  apiResult2 = await apiService.get_recipe_id2(id);
-  apiResult2.userRatings!.keys!.forEach((value) {
-    recipeId2.add(int.parse(value));
-  });
-  store.modelRecipeID = recipeId2;
-  //get model recommended recipe's description
-  store.modeldescription = await getD(store.modelRecipeID);
-  print(store.modeldescription!.descriptions.length);
-  // Get model recipe's images
-  store.modelimagelist = await getI(store, store.modeldescription!);
-
   //get new recipe's id
   dynamic apiResult3;
   apiResult3 = await apiService.get_recipe_id3();
@@ -73,6 +59,30 @@ Future<Store> Recommendations(int id) async {
   store.newdescription = await getD(store.newRecipeID);
   // Get new recipe's images
   store.newimagelist = await getI(store, store.newdescription!);
+
+
+
+
+  //get model based recommended recipe's id
+  dynamic apiResult2;
+  List<int>? recipeId2 = [];
+  List? user_predictions = [];
+  apiResult2 = await apiService.get_recipe_id2(id);
+  apiResult2.userRatings!.keys!.forEach((value) {
+    recipeId2.add(int.parse(value));
+  });
+
+  store.modelRecipeID = recipeId2;
+  apiResult2.userPredictions!.values!.forEach((value) {
+    user_predictions.add(value);
+  });
+  store.user_predictions = user_predictions;
+  //get model recommended recipe's description
+  store.modeldescription = await getD(store.modelRecipeID);
+  print(store.modeldescription!.descriptions.length);
+  // Get model recipe's images
+  store.modelimagelist = await getI(store, store.modeldescription!);
+
 
   print('done');
   return store;

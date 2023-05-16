@@ -11,9 +11,9 @@ class UseridCubit extends Cubit<Stream<Currentuserid>?> {
         super(DatabaseService(fid: fid)
             .currentID); //In the constructor of a Dart class, the colon : is used to initialize fields before the constructor body is executed.
 
-  void changeid(int newid,String role) async {
+  void changeid(int newid) async {
  
-    await DatabaseService(fid: _fd).updateid(newid,role);
+    await DatabaseService(fid: _fd).updateid(newid);
     emit(DatabaseService(fid: _fd).currentID);
   }
 

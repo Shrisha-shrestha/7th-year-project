@@ -8,7 +8,6 @@ import '../helper/wrapper.dart';
 import '../model/Storagemodel.dart';
 import '../model/firebasecollection.dart';
 import '../pages/cookBook.dart';
-import '../pages/dashboard.dart';
 import '../pages/home.dart';
 import '../pages/search.dart';
 
@@ -66,32 +65,40 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         );
 
-    return BlocBuilder<UseridCubit, Stream<Currentuserid?>?>(
-      builder: (context, state) {
-        return StreamBuilder(
-            stream: state,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                Currentuserid? ud = snapshot.data;
-                String role = ud!.role;
-                if (role == 'Client') {
-                  return Scaffold(
-                    bottomNavigationBar: _bottomNavigationBar(selectedindex),
-                    body: PageStorage(
-                      child: pages[selectedindex],
-                      bucket: bucket,
-                    ),
-                  );
-                } else {
-                  return Dashboard(
-        fid: widget.fid,
-      );
-                }
-              } else {
-                return Loading();
-              }
-            });
-      },
+    return Scaffold(
+      bottomNavigationBar: _bottomNavigationBar(selectedindex),
+      body: PageStorage(
+        child: pages[selectedindex],
+        bucket: bucket,
+      ),
     );
+
+    // return BlocBuilder<UseridCubit, Stream<Currentuserid?>?>(
+    //   builder: (context, state) {
+    //     return StreamBuilder(
+    //         stream: state,
+    //         builder: (context, snapshot) {
+    //           if (snapshot.hasData) {
+    //             Currentuserid? ud = snapshot.data;
+    //             String role = ud!.role;
+    //             if (role == 'Client') {
+    //               return Scaffold(
+    //                 bottomNavigationBar: _bottomNavigationBar(selectedindex),
+    //                 body: PageStorage(
+    //                   child: pages[selectedindex],
+    //                   bucket: bucket,
+    //                 ),
+    //               );
+    //             } else {
+    //               return Dashboard(
+    //     fid: widget.fid,
+    //   );
+    //             }
+    //           } else {
+    //             return Loading();
+    //           }
+    //         });
+    //   },
+    // );
   }
 }

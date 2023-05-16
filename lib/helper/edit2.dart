@@ -8,15 +8,15 @@ import '../model/firebasecollection.dart';
 import 'package:recipe/model/Storagemodel.dart';
 import '../authentication/authenticationServices.dart';
 
-class change2 extends StatefulWidget {
-  change2({super.key, required this.nameclass});
+class changeName extends StatefulWidget {
+  changeName({super.key, required this.nameclass});
   final Currentpinfo? nameclass;
 
   @override
-  State<change2> createState() => _change2State();
+  State<changeName> createState() => _changeNameState();
 }
 
-class _change2State extends State<change2> {
+class _changeNameState extends State<changeName> {
   String? name;
   final _formkey = GlobalKey<FormState>();
   @override
